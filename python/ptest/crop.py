@@ -1,6 +1,11 @@
 import cv2 
 import uuid
 import glob as glob
+import sys
+if len(sys.argv)<=1:
+    print('need file name')
+    sys.exit(1)
+path=sys.argv[1]
 def crop_img(img, scale=1.0,name='default'):
   
     
@@ -33,13 +38,13 @@ def crop_img(img, scale=1.0,name='default'):
     cv2.imwrite( name ,img_cropped)
     #    print('else')
 
-imgs = glob.glob('E:\\files\\AA\\companyproduct\\YM_7x11_00190\\images\\117971b3-8b9d-4978-ab4a-85fec637f938.jpg')
-#imgs = glob.glob('E:\\files\\rootpic\\*')
+imgs = glob.glob(path)
+#imgs = glob.glob('E:\\\\files\\\\rootpic\\\\*')
 print(len(imgs))
 for m in imgs:
  img=cv2.imread(m)
 
- crop_img(img, 0.98,m)
+ crop_img(img, 0.95,m)
 
 
  print('copying %s ' % m) 
