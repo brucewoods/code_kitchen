@@ -1,0 +1,20 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build cpp programs",
+            "type": "shell",
+            "command": "gcc",
+            "presentation": {
+                "panel": "new"
+            },
+            "args": [
+                "-g", "${fileBasename}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

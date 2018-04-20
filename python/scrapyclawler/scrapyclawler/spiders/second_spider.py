@@ -14,11 +14,7 @@ class SecondSpider(scrapy.Spider):
      wrongs=[]
      def start_requests(self):
       
-         url='http://messefrankfurt.kenti-creative.com/modules/exhibitor/ajax/more2.php?moduleId=129&pageName=list2&pId=14&yId=0&hId=0&uId=-2&cId=undefined&aId=-1&fId=0&plang=3'
          urls = [
-            'http://messefrankfurt.kenti-creative.com/index.php?moduleId=129&pageName=list2&pId=14&plang=3',
-            'http://messefrankfurt.kenti-creative.com/index.php?moduleId=129&pageName=list2&pId=14&plang=3',
-            'http://messefrankfurt.kenti-creative.com/index.php?moduleId=129&pageName=list2&pId=14&plang=3',
             'http://messefrankfurt.kenti-creative.com/index.php?moduleId=129&pageName=list2&pId=14&plang=3',
           
              ]
@@ -28,48 +24,53 @@ class SecondSpider(scrapy.Spider):
              yield scrapy.FormRequest(u, callback=self.parse_m,
                                  method='POST')
       
-         for  i in range(5):
-             form_data={"page":"%s" % i}
-             self.current_index=i
-             yield scrapy.FormRequest(url, callback=self.parse,
-                                 method='POST', formdata=form_data)
+        
          print(self.wrongs)
      def  parse_m(self,response):
+         url='http://messefrankfurt.kenti-creative.com/modules/exhibitor/ajax/more2.php?moduleId=129&pageName=list2&pId=14&yId=0&hId=0&uId=-2&cId=undefined&aId=-1&fId=0&plang=3'
+         
          with open('mother%s.html'% random.randint(3,90) ,'wb') as f:
              f.write(response.body)
+        
+         for  i in range(5):
+                 form_data={"page":"%s" % i}
+         
+                 yield scrapy.FormRequest(url, callback=self.parse,
+                                 method='POST', formdata=form_data)
+         
 
      def parse(self,response):
-        body=str(response.body).replace("\\","")
-        
-        if "No more exhibitor" in str(response.body):
-          line=str(self.current_index) + "\n\n" 
-          with open ('s.json','wb') as f:
-              f.write(line.encode('utf-8'))
-          self.wrongs.append(self.current_index)
-        # newbody=Selector(text=body)  
-        # less=newbody.css('div.companyLess')
-        # more=newbody.css('div.companyMore')
-        pa=BeautifulSoup(body,'html.parser')
+      
+        print(response.body)
+        # if "No more exhibitor" in str(response.body):
+        #   line=str(self.current_index) + "\n\n" 
+        #   with open ('s.json','wb') as f:
+        #       f.write(line.encode('utf-8'))
+        #   self.wrongs.append(self.current_index)
+        # # newbody=Selector(text=body)  
+        # # less=newbody.css('div.companyLess')
+        # # more=newbody.css('div.companyMore')
+        # pa=BeautifulSoup(body,'html.parser')
        
-        find=pa.find_all("div",class_="companyMore")
+        # find=pa.find_all("div",class_="companyMore")
      
-        print('$$$$$$$$$$$$$$$$$')
-        for c in  find  :
-          def   jl(loc):
-                   return  c.find('td',text=loc).find_next().text if c.find('td',text=loc) else ''
+        # print('$$$$$$$$$$$$$$$$$')
+        # for c in  find  :
+        #   def   jl(loc):
+        #            return  c.find('td',text=loc).find_next().text if c.find('td',text=loc) else ''
         
          
-          print(c.find('td',text="Address:").find_next().text if c.find('td',text="Address:") else '')
-          yield{
-               'name':c.find_previous_sibling('div').div.text,
-              'booth':c.find_previous_sibling('div').find_all('span')[2].text,
-              'address':jl("Address:"),
-             'phone': jl("Tel Number:"),
-                'fax':jl("Fax Number:"),
-               'email':jl("E-mail:"),
-                'website':jl("Website:"),
-               'bio':jl("Product group:"),
-               }
+        #   print(c.find('td',text="Address:").find_next().text if c.find('td',text="Address:") else '')
+        #   yield{
+        #        'name':c.find_previous_sibling('div').div.text,
+        #       'booth':c.find_previous_sibling('div').find_all('span')[2].text,
+        #       'address':jl("Address:"),
+        #      'phone': jl("Tel Number:"),
+        #         'fax':jl("Fax Number:"),
+        #        'email':jl("E-mail:"),
+        #         'website':jl("Website:"),
+        #        'bio':jl("Product group:"),
+        #        }
       
 
         

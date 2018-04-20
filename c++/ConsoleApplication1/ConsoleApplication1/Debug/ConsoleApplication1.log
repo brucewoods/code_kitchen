@@ -1,0 +1,6 @@
+﻿ConsoleApplication1.obj : error LNK2019: unresolved external symbol _cvLoadImage referenced in function _main
+ConsoleApplication1.obj : error LNK2019: unresolved external symbol _cvNamedWindow referenced in function _main
+ConsoleApplication1.obj : error LNK2019: unresolved external symbol _cvShowImage referenced in function _main
+ConsoleApplication1.obj : error LNK2019: unresolved external symbol _cvDestroyWindow referenced in function _main
+ConsoleApplication1.obj : error LNK2019: unresolved external symbol _cvWaitKey referenced in function _main
+F:\workspace\workstation\git\code_kitchen\c++\ConsoleApplication1\Debug\ConsoleApplication1.exe : fatal error LNK1120: 5 unresolved externals
