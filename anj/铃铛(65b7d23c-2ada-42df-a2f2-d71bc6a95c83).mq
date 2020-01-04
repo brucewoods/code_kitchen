@@ -249,7 +249,7 @@ Sub 通用功能()
 
     If 多点比色(按钮选老导) = True Then Goto 退出
     If 多点比色(按钮接完任) = True Then 
-        Delay 2000
+        Delay 1200
         If 多点比色(按钮接完任) = True Then Goto 退出
     End If
     if 多点比色(按钮中间接)=True   Then Goto 退出
