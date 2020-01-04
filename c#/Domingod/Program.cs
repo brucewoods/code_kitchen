@@ -10,6 +10,7 @@ namespace Domingod
 
             // NewYorCitySearch();
            // PrintWords();
+           ReTesting.abc();
            var date=DateTime.Now;
            var lastmonth=date.AddDays(-date.Day).ToString("yyyy-MM-dd");
            Console.WriteLine(lastmonth);

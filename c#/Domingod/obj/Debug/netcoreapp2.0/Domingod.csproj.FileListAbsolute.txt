@@ -8,3 +8,13 @@ F:\workspace\workstation\git\domingod-c#-test\Domingod\obj\Debug\netcoreapp2.0\D
 F:\workspace\workstation\git\domingod-c#-test\Domingod\obj\Debug\netcoreapp2.0\Domingod.AssemblyInfo.cs
 F:\workspace\workstation\git\domingod-c#-test\Domingod\obj\Debug\netcoreapp2.0\Domingod.dll
 F:\workspace\workstation\git\domingod-c#-test\Domingod\obj\Debug\netcoreapp2.0\Domingod.pdb
+F:\workspace\workstation\git\code_kitchen\c#\Domingod\bin\Debug\netcoreapp2.0\Domingod.deps.json
+F:\workspace\workstation\git\code_kitchen\c#\Domingod\bin\Debug\netcoreapp2.0\Domingod.runtimeconfig.json
+F:\workspace\workstation\git\code_kitchen\c#\Domingod\bin\Debug\netcoreapp2.0\Domingod.runtimeconfig.dev.json
+F:\workspace\workstation\git\code_kitchen\c#\Domingod\bin\Debug\netcoreapp2.0\Domingod.dll
+F:\workspace\workstation\git\code_kitchen\c#\Domingod\bin\Debug\netcoreapp2.0\Domingod.pdb
+F:\workspace\workstation\git\code_kitchen\c#\Domingod\obj\Debug\netcoreapp2.0\Domingod.csproj.CoreCompileInputs.cache
+F:\workspace\workstation\git\code_kitchen\c#\Domingod\obj\Debug\netcoreapp2.0\Domingod.AssemblyInfoInputs.cache
+F:\workspace\workstation\git\code_kitchen\c#\Domingod\obj\Debug\netcoreapp2.0\Domingod.AssemblyInfo.cs
+F:\workspace\workstation\git\code_kitchen\c#\Domingod\obj\Debug\netcoreapp2.0\Domingod.dll
+F:\workspace\workstation\git\code_kitchen\c#\Domingod\obj\Debug\netcoreapp2.0\Domingod.pdb
