@@ -8,12 +8,12 @@ Dim Count=0
 Dim Openwindow=false
 Dim Stuck=false
 Dim HasNew=true
-Dim 任务检测时间 = 0, 任务延时 = 0
+Dim 任务检测时间 = 0, 任务延时 = 0,其他检测时间=0
 Dim 完成支线否=0
 Dim 考试状态=0
 //
 
-Dim 是否完成主线=0,是否完成支线=0
+Dim 是否完成主线=0,是否完成支线=0,自动任务=0
 
 // 
 Dim 按钮升强确=Array("241|726|4CA5DF,244|772|51AAE4,243|820|4EA8E2,242|457|4CA6E0",0.9,240,740)
@@ -24,12 +24,20 @@ Dim 按钮先宝宝=Array("150|408|4DA1E0,143|783|4799DB,138|862|4B9CDE,147|411|4B9DD
 Dim 按钮选老导=Array("231|221|3D83C5,242|1043|4394CE,238|908|4491CF,225|358|3B85C6",0.9,240,935) 
 Dim 按钮接完任=Array("200|912|367666,229|1043|50A49B,203|1044|4A8C7B,190|912|346E5E,194|1018|468870",0.9,208,955,"212|908|649CB5,209|1045|407894",0.9) 
 Dim 按钮中间接=Array("315|471|377160,346|472|4D9F96,314|703|468770,330|708|3C8576,351|715|4DA59C",0.9,331,610,"328|469|427494,328|719|427494,169|586|226392",0.9)
+Dim 按钮造神器=Array("619|711|0304BF,668|122|3131BD,616|713|050FB7,670|237|3131BD",576,671,null,null,20,20,333) 
+Dim 按钮造神器一=Array("618|704|DDEBFC,611|713|F3F5FB,622|709|C4C9FD,685|1239|FFFFFF",0.9) 
 
 
-Dim 图标宠物栏=Array("571|42|4A97C9,573|39|529ECA,578|54|54A1BF,591|37|4794AD",0.9,568,32,null,null,20,20)
 
+Dim 图标宠物栏=Array("571|42|4A97C9,573|39|529ECA,578|54|54A1BF,591|37|4794AD",0.9,568,32,null,null,20,20,200)
 
+Dim 窗口大页面=Array("675|579|CAE2EB,681|721|CCE4ED,636|1213|C8EAFD,622|1225|D7FEFD,636|1228|D7FBFD,690|531|B9D5E5",0.9) 
 
+//
+Dim 字一支线=Array(374,0,458,249,"支","00FF00-101010|00FF00-101010|00FF00-101010",0.9)
+
+Dim 字一卡级=Array(410,7,485,250,"级后继","ECECEC-101010|B2B4B3-101010|FFFFFF-101010",0.8)
+Dim 字一冒泡=Array(36,316,655,340,"O","B6C6E7-101010|D1D8F5-101010|8992BE",0.5)
 
 
 
@@ -44,8 +52,21 @@ TracePrint UseDict(0)
 Dim SX=GetScreenX()
 Dim SY=GetScreenY()
 
-Sub 执行主线()
+Function 随(上限)
+    Dim t=Rnd()*上限
+    随=t
+End Function
+Function 主线任务()
+    
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+    If 查找主线() = True Then Exit Function
+    是否完成主线 = 1
+    输出 "主线已经完成"
+    重置时间
+     
 
+End Function
+Sub 查找主线()
     Dim intX,intY
     //----弹窗0 创号------
 
@@ -65,24 +86,22 @@ Sub 执行主线()
 
 
     Call 信息提示("主线")	
-
-    If CmpColorEx("509|35|1F4168,514|60|1F4168,508|74|1F4168",0.9) = 1 and CmpColorEx("502|66|6BCDF7,504|50|72CCF5,493|53|82E4FE",0.7) = 1  Then
-        Tap 473,37
+    
+    
+    If CmpColorEx("509|35|1F4168,514|60|3001F4168,508|74|1F4168", 0.9) = 1 and CmpColorEx("502|66|6BCDF7,504|50|72CCF5,493|53|82E4FE", 0.7) = 1 Then 
+         
+        If 找字(字一卡级) Then 
+            查找主线=True
+            是否完成主线=1
+            重置时间 
+        Else 
+            任务检测时间 = TickCount()
+            任务延时 = 10000
+            输出 "点击主线"
+            防封点击 412, 12, 30, 180, 随(300)
+        End If
     End If
-    //FindStr(426,2,544,203,"主线","00FF00|299A2C|07ED08|338637|07EF07|01FD01",0.9,intX,intY)
-    //TracePrint "主线调试",intX,intY
-    //
-    //If  intX > -1 And intY > -1  Then
-    //
-    //	Tap intX, intY
-    //	Call 信息提示("主线ing")
-    //Else 
-    //FindStr(430,11,457,49,"主线","FFFFFF|F1EFF5|D4D2E2",0.9,intX,intY)
-    //If intX > -1 And intY > -1 Then
-    //	Tap intX, intY
-    //	Call 信息提示("主线ing")
-    //End If
-    //End If
+    
 
     //----弹窗  奖励------
 
@@ -186,37 +205,30 @@ Sub 执行主线()
 
 
     Rem 退出
-
-
-	
 End Sub
 
 //var 
 
 Function 支线任务()
     If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
-    If 检查支线做好了没() Then Exit Function
-    For 3
-        上滑 
-		
-        If 检查支线做好了没() Then Exit Function
-		
-    Next
-	
-    For 3
-        下滑 
-		
-        If 检查支线做好了没() Then Exit Function
-		
-    Next
-    完成支线否 = 0
+    If 查找支线() Then Exit Function
+   
+    是否完成支线 = 1
     输出 "支线已完成"
     重置时间
 	
 	
 End Function
-Function 重置时间()
-End Function
+Sub 重置时间
+    If 自动任务 = 0 Then
+        任务检测时间 = 0
+        任务延时 = 0
+    Else 
+        任务检测时间 = TickCount()
+        任务延时 = 10000
+    End If
+    其他检测时间 = TickCount()
+End Sub
 Function 多点比色(数组)
   
     If CmpColorEx(数组(0), 数组(1)) = 1 Then 
@@ -225,16 +237,107 @@ Function 多点比色(数组)
         多点比色 = True
         If 数组(7) <> null Then 
         	
-        防封点击(数组(2), 数组(3),数组(6),数组(7))
+            防封点击(数组(2), 数组(3),数组(6),数组(7),数组(8))
         
-         ElseIf 数组(2) > 0 and 数组(3) > 0 Then
-          Tap  数组(2), 数组(3)
+        ElseIf 数组(2)<> null and 数组(2) > 0 and 数组(3) > 0 Then
+            Tap  数组(2), 数组(3)
         End If
     End If
 End Function
+Function 找字(数组)
+    Dim intX,intY 
+    FindStr 数组(0), 数组(1), 数组(2),数组(3), 数组(4), 数组(5), 数组(6), intX, intY
+    If intX>0 Then 找字=Array(intX,intY)
+End Function
  
-Function 检查支线做好了没()
+Function 查找支线()
+    Dim f=找字(字一支线)
+    If f=null Then Exit Function
+    If f(0)<>null and f(0) > 1 Then 
+        查找支线 = True
+        任务检测时间 = TickCount()
+        任务延时 = 10000
+        输出 "点击支线"&f(0)&f(1)
+        防封点击(f(0),f(1),10,100,随(222))
+    End If  
+	 
+	  
+	  
+End Function
+Function 红色冒泡()
 	
+    Dim 神器=Array(592,671,611,709,"E7E7EA-101010",617,708,"0101C3")
+    Dim 福利=Array(654,835,692,872,"D1D1DB",695,872,"0F20A5",0.9) 
+    Dim 背包=Array("308|1129|1C6BAF,331|1165|CBD4E6,335|1167|010EB7",0.9) 
+    Dim 菜单=CmpColorEx ("337|1212|24B7C6,349|1227|2FC8CE,350|1237|29C6CA,351|1232|29C5CA",0.9) 
+
+    Dim 技能=Array(212,1215,245,1251,"C1C3EC",249,1252,"0106AF",0.9) 
+    Dim 强化= Array(40,1210,74,1251,"B6BEE9",76,1251,"1328CD",0.9) 
+    Dim 英雄=Array(46,1032,74,1080,"B8C7FA",76,1080,"152AD1",0.9) 
+    
+    If 冒泡点击(神器) = True Then 
+        Delay 1200
+        防封点击 128, 491, 50, 50, 900
+        防封点击 128, 626, 50, 50, 500
+        防封点击 128, 766, 50, 50, 600
+        防封点击 128, 897, 50, 50, 700
+        防封点击 128, 1034, 50, 50, 400
+        Delay 1200
+         防封点击 581,1196,10,10 ,300
+         
+    		
+    End If
+    	
+    TracePrint "菜单",菜单
+    If 菜单 = 0 and CmpColorEx("344|1246|323AE5,668|170|3131BD",0.9)=1  Then 
+        防封点击 308, 1212, 40, 40, 200
+        Delay 300
+        If 冒泡点击(技能) = True Then 
+        	
+            防封点击 64,701,30,150,200
+            Delay  1200
+            防封点击 229, 709, 30, 100, 200
+            Delay  2200
+    		 防封点击 581,1196,10,10 ,300
+        ElseIf 冒泡点击(强化) = True Then
+            防封点击 64,701,30,150,200
+            Delay  1200
+            防封点击 229,709,30,100,200
+    	    Delay  2200
+    		 防封点击 581,1196,10,10 ,300
+        ElseIf 冒泡点击(英雄) Then
+            防封点击 156, 885, 30, 100, 200
+              Delay  2200
+    		 防封点击 581,1196,10,10 ,300
+      
+            
+        End If
+    Else 
+    	    Delay 300
+            防封点击 308, 1212, 40, 40, 200
+    End If
+    
+
+	
+End Function
+Function 冒泡点击(数组)
+	
+	Dim red,white,redmix,whitemix
+	red = "670|142|3131BD"
+	white = "685|1239|FFFFFF"
+	whitemix = CStr(数组(2) & "|" & 数组(3) & "|" & 数组(4) & "," & white)
+	
+	redmix=Cstr(数组(5)&"|"&数组(6)&"|"&数组(7)&","&red)
+	TracePrint "whitemix",CmpColorEx (whitemix,0.9)
+	TracePrint whitemix
+	
+    If CmpColorEx (whitemix,0.9) = 1 and CmpColorEx(redmix,0.9) = 1 Then 
+        冒泡点击=True 	 
+        防封点击 数组(0), 数组(1), 40, 40, 300
+    	
+    	  	    	  	
+    End If  	  	
+     
 End Function
 Function 上滑()
 	
@@ -245,8 +348,20 @@ End Function
 Function 输出(内容)
     TracePrint 内容
 End Function
-Sub 通用功能()
-
+Function 通用功能()
+     
+    // 只运行一次 
+    
+    Rem  开端
+    If 多点比色(图标宠物栏) = True Then  
+        防封点击 53, 1026, 20, 100,5000
+        Delay 6500
+        Goto 退出
+    End If
+    If 考试状态=1   Then  Goto 开端
+    
+    If   多点比色(窗口大页面) = True Then Goto 退出
+   
     If 多点比色(按钮选老导) = True Then Goto 退出
     If 多点比色(按钮接完任) = True Then 
         Delay 1200
@@ -258,9 +373,9 @@ Sub 通用功能()
     if 多点比色(按钮新物用)=True   Then Goto 退出
     if 多点比色(按钮先坐骑)=True   Then Goto 退出
     if 多点比色(按钮先宝宝)=True   Then Goto 退出
+    
  
- 
-    If 考试状态=1   Then Goto 退出
+   
     If CmpColorEx("459|1053|95AEBE-101010,448|1065|ABC4DA-101010,456|1072|9DB6C6-101010,459|1072|A0B1C1-101010",0.9) = 1 Then
         Tap 459, 1053
         Goto 退出
@@ -270,10 +385,7 @@ Sub 通用功能()
         Goto 退出
     End If
 
-    If CmpColorEx("591|1218|E1F3F7-101010,625|1221|DBFCFD-101010,634|1225|C8EDFD-101010,638|1212|D7FAFC-101010",0.9) = 1 Then
-        Tap 638, 1212
-        Goto 退出
-    End If
+  
     If CmpColorEx("597|921|94A7B6,584|931|AEC7D6,596|942|99AAB9,574|938|A8C3D7",0.9) = 1 and CmpColor(584,931,"AEC7D6",0.9)<> CmpColor(585,917,"AEC7D6",0.9)   Then
         Tap 597, 921
         Goto 退出
@@ -291,8 +403,13 @@ Sub 通用功能()
         Goto 退出
     End If
     
-    Rem 退出    
-End Sub
+    Rem 退出
+    
+    If CmpColorEx("591|1218|E1F3F7-101010,625|1221|DBFCFD-101010,634|1225|C8EDFD-101010,638|1212|D7FAFC-101010",0.9) = 1 Then
+        Tap 638, 1212
+    
+    End If
+End Function
 
 
 Sub 人物状态()
@@ -309,7 +426,7 @@ Sub 人物状态()
  
     End If
 
-
+  
 End Sub
 
  
@@ -330,10 +447,13 @@ Sub 判断挂机(AFK)
   
 	 
 End Sub
-Function  防封点击(x,y,移动x,移动y)
-Dim  xx=x+Int(Rnd()*移动x)
-Dim  yy=y+Int(Rnd()*移动y)
-Tap xx,yy
+Function  防封点击(x,y,移动x,移动y,延时)
+    Dim  xx=x+Int(Rnd()*移动x)
+    Dim  yy=y+Int(Rnd()*移动y)
+    Tap xx, yy
+    Delay 延时
+
+    TracePrint xx,yy
 End Function
 Sub 信息提示(内容)
 
@@ -345,27 +465,34 @@ Sub 信息提示(内容)
     Delay 1500
 End Sub
 
+Sub 主程序()
+    Do
 
-Do
-
-    Count=Count+1
-    TracePrint "----------------------",Count,"----------------------"
-    TracePrint "屏幕分辨率：X:",SX,"Y:",SY
-    Call 信息提示(State)
-    if State Then	
-        Call 执行主线()
-
-
- 
-        //Call 交接任务()
-
- 
-        Call 判断挂机(AFK)
-
-
-
+        Count=Count+1
+        TracePrint "----------------------",Count,"----------------------"
+        TracePrint "屏幕分辨率：X:",SX,"Y:",SY
+        Call 信息提示(State)
+    
+        If 是否完成主线 = 0 Then 
+            自动任务 = 0
+            主线任务
+      
+        ElseIf 是否完成支线 = 0 Then 
+            自动任务 = 0
+            支线任务
+        End If
+        Call 人物状态()
         Call 通用功能()
-    End If
-    Call 人物状态()
 
-Loop
+    Loop
+
+End Sub
+Sub Test()
+For 100
+	红色冒泡
+	Delay 3000
+Next
+End Sub
+
+Test
+//主程序

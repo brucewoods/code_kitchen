@@ -1,0 +1,15 @@
+Sub test(a)
+    
+    If a="quit" Then Exit Sub
+    TracePrint a
+End Sub
+
+ 
+ For 10
+   	 
+   	 test("a") 
+ 	  
+ 	 test("b") 
+ 	   test("quit") 
+ 	   test("c") 
+ Next

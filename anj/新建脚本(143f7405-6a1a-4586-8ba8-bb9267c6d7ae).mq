@@ -1,0 +1,9 @@
+
+
+
+
+Function Test(a, b, c)
+	TracePrint a,b
+End Function
+
+Test a,b,c,d

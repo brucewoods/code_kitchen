@@ -1,0 +1,6 @@
+Dim s=Array("681|588|CBE3EC,681|626|DCECF4,671|721|CDE5EE,627|1221|DAFBFD,634|1228|D4F9FD,589|88|DBF4FD",0.9) 
+
+
+If s(4)>0 Then 
+	TracePrint  "work"
+End If
