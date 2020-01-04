@@ -1,0 +1,426 @@
+// 确认1
+Dim  Flag=0
+Dim  ScreenH=GetScreenY()
+Dim  AFK=0,IsAFK=false
+Dim Points(51,51)
+Dim State=True
+Dim Count=0
+Dim Openwindow=false
+Dim Stuck=false
+Dim HasNew=true
+Dim 任务检测时间 = 0, 任务延时 = 0
+Dim 完成支线否=0
+Dim 考试状态=0
+//
+
+Dim 是否完成主线=0，是否完成支线=0
+
+// 
+Dim 按钮升强确=Array("241|726|4CA5DF,244|772|51AAE4,243|820|4EA8E2,242|457|4CA6E0",0.9,240,740)
+Dim 按钮升强能=Array("71|711|499BDD,64|823|4A9BDD,68|997|4799DB,66|1063|4799DB",0.9,70,761)
+Dim 按钮新物用=Array("192|849|489ADC,192|936|489ADC,196|941|4B9DDF,196|844|4B9DDF,191|936|4799DB",0.9,211,880)
+Dim 按钮先坐骑=Array("106|810|4799DB,108|373|4799DB,105|864|4A9CD7,110|906|489ADC,109|474|4799DB",0.9,116,839)
+Dim 按钮先宝宝=Array("150|408|4DA1E0,143|783|4799DB,138|862|4B9CDE,147|411|4B9DDF,148|766|4C9EE0",0.9,145,788) 
+Dim 按钮选老导=Array("231|221|3D83C5,242|1043|4394CE,238|908|4491CF,225|358|3B85C6",0.9,240,935) 
+Dim 按钮接完任=Array("200|912|367666,229|1043|50A49B,203|1044|4A8C7B,190|912|346E5E,194|1018|468870",0.9,208,955,"212|908|649CB5,209|1045|407894",0.9) 
+Dim 按钮中间接=Array("315|471|377160,346|472|4D9F96,314|703|468770,330|708|3C8576,351|715|4DA59C",0.9,331,610,"328|469|427494,328|719|427494,169|586|226392",0.9)
+
+
+
+
+
+
+
+SetRowsNumber(0)
+//注意：每次制作完字库后，需要自行把制作的字库文件添加到脚本“附件”中
+TracePrint SetDictEx(0, "Attachment:task.txt")
+TracePrint UseDict(0)
+//以上两句脚本只需要调用一次
+//----------------------------------主线任务----------------------------------------------------------
+
+Dim SX=GetScreenX()
+Dim SY=GetScreenY()
+Do
+
+    Count=Count+1
+    TracePrint "----------------------",Count,"----------------------"
+    TracePrint "屏幕分辨率：X:",SX,"Y:",SY
+    Call 信息提示(State)
+    if State Then	
+        Call 执行主线()
+
+
+ 
+        //Call 交接任务()
+
+ 
+        Call 判断挂机(AFK)
+
+
+
+        Call 通用功能()
+    End If
+    Call 人物状态()
+
+Loop
+
+Sub 执行主线()
+
+    Dim intX,intY
+    //----弹窗0 创号------
+
+ 
+
+
+    //跳过新手
+
+    FindMultiColor 0,0,0,0,"3C84C6","15|39|266FA5,38|123|6FBDDE",0,1,intX,intY
+    If intX > -1 And intY > -1 Then
+        TracePrint intX
+        TracePrint intY
+        Tap   intX, intY
+        Delay 200
+    End If
+
+
+
+    Call 信息提示("主线")	
+
+    If CmpColorEx("509|35|1F4168,514|60|1F4168,508|74|1F4168",0.9) = 1 and CmpColorEx("502|66|6BCDF7,504|50|72CCF5,493|53|82E4FE",0.7) = 1  Then
+        Tap 473,37
+    End If
+    //FindStr(426,2,544,203,"主线","00FF00|299A2C|07ED08|338637|07EF07|01FD01",0.9,intX,intY)
+    //TracePrint "主线调试",intX,intY
+    //
+    //If  intX > -1 And intY > -1  Then
+    //
+    //	Tap intX, intY
+    //	Call 信息提示("主线ing")
+    //Else 
+    //FindStr(430,11,457,49,"主线","FFFFFF|F1EFF5|D4D2E2",0.9,intX,intY)
+    //If intX > -1 And intY > -1 Then
+    //	Tap intX, intY
+    //	Call 信息提示("主线ing")
+    //End If
+    //End If
+
+    //----弹窗  奖励------
+
+    FindMultiColor 0,0,0,0,"055AAE-101010","17|26|264B87-101010,23|46|5C5C64-101010,39|53|4AB8E2",0,1,intX,intY
+    If intX > -1 And intY > -1 Then
+        TracePrint intX
+        TracePrint intY
+        Tap   intX, intY
+        Delay 200
+        Flag = 2
+        Goto 退出
+    End If
+
+    FindMultiColor 39,260,650,1041,"014365-101010","25|5|75BEED-101010,37|8|6CB5DE-101010",3,1,intX,intY
+    If  intX > -1 And intY > -1 Then
+        TracePrint intX
+        TracePrint intY
+        Tap   intX, intY
+        Delay 200
+        Goto 退出
+    End If
+
+
+    //---弹窗 选填
+
+    FindStr(667,625,695,690,"科举","283570-101010|475587-101010|93A2BF-101010",0.9,intX,intY)
+    if  intX>0  Then 
+        TracePrint "exam"
+  
+        For 5
+  	 
+            Tap 440, 850
+            Delay  200
+            考试状态=1	 
+   
+        Next
+        Goto 退出
+    End If
+
+    //----弹窗 擦信
+    FindMultiColor 11,158,662,1122,"576F80","105|-125|7F97A7,251|-261|6576A9,-202|-105|495786,139|233|485F71,275|282|547698",1,1,intX,intY
+    //FindMultiColor 61,136,638,1074,"7B94A4-101010","-221|-3|5B6A74-101010,-113|441|677E8E-101010,-282|366|678192-101010,98|725|6683A5-101010",4,0.9,intX,intY
+    If intX > -1 And intY > -1 Then 
+        TracePrint "擦信",intX,intY
+        Dim i
+  
+        i=-1
+        For 20
+            i=i+1
+            Swipe  50*i, i, 50*i, 1280
+	 
+            Delay 500
+        Next
+           
+    
+        Tap   intX, intY
+        Delay 200
+  
+        Goto 退出             
+
+    End If
+
+
+
+    Delay  1500
+    //-----弹窗 购物
+    FindMultiColor 153,161,627,773,"3B5C83-101010","-25|-67|ADD5E5-101010,-37|-143|3E88C9,13|-411|152DB0,-9|-447|79DBFB,-32|-455|1324AE",4,0.8,intX,intY
+    Delay  1500
+    TracePrint "购物",intX,intY
+
+
+    If   intX > -1 And intY > -1 Then
+  
+        Tap intX,intY
+        Goto  退出
+	  	
+    End If
+
+
+
+
+    //---
+    Dim  a1,b1,c1,d1,e1,f1,a2,b2,c2,d2,e2,f2
+
+    FindPic 0, 0, 0, 0, "Attachment:e1.png", "000000", 0, 1, a1, b1
+    If a1 > -1 Then 
+        TouchDown 517, 251, 1
+        TouchMove 517, 597, 1, 200
+
+        Call 信息提示("拼图")
+        D
+        TouchDown 257,241, 1
+        TouchMove 226, 543, 1, 200
+        TouchUp  1
+        Call 信息提示("拼图")
+        TouchDown 356, 1012, 1
+        TouchMove 410, 754, 1, 200
+        TouchUp  1
+        Goto 退出
+    End If
+
+
+    Rem 退出
+
+
+	
+End Sub
+
+//var 
+
+Function 支线任务()
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+    If 检查支线做好了没() Then Exit Function
+    For 3
+        上滑 
+		
+        If 检查支线做好了没() Then Exit Function
+		
+    Next
+	
+    For 3
+        下滑 
+		
+        If 检查支线做好了没() Then Exit Function
+		
+    Next
+    完成支线否 = 0
+    输出 "支线已完成"
+    重置时间
+	
+	
+End Function
+Function 重置时间()
+End Function
+Function 多点比色(数组)
+  
+    If CmpColorEx(数组(0), 数组(1)) = 1 Then 
+   
+        If 数组(4) <> null And CmpColorEx(数组(4), 数组(5)) = 0 Then Exit Function
+        多点比色 = True
+        If 数组(2) > 0 and 数组(3) > 0 Then Tap 数组(2), 数组(3)
+    End If
+End Function
+ 
+Function 检查支线做好了没()
+	
+End Function
+Function 上滑()
+	
+End Function
+Function 下滑()
+	
+End Function
+Function 输出(内容)
+    TracePrint 内容
+End Function
+Sub 通用功能()
+
+    If 多点比色(按钮选老导) = True Then Goto 退出
+    If 多点比色(按钮接完任) = True Then 
+        Delay 2000
+        If 多点比色(按钮接完任) = True Then Goto 退出
+    End If
+    if 多点比色(按钮中间接)=True   Then Goto 退出
+    if 多点比色(按钮升强确)=True   Then Goto 退出
+    if 多点比色(按钮升强能)=True   Then Goto 退出
+    if 多点比色(按钮新物用)=True   Then Goto 退出
+    if 多点比色(按钮先坐骑)=True   Then Goto 退出
+    if 多点比色(按钮先宝宝)=True   Then Goto 退出
+ 
+ 
+    If 考试状态=1   Then Goto 退出
+    If CmpColorEx("459|1053|95AEBE-101010,448|1065|ABC4DA-101010,456|1072|9DB6C6-101010,459|1072|A0B1C1-101010",0.9) = 1 Then
+        Tap 459, 1053
+        Goto 退出
+    End If
+    If CmpColorEx("662|1209|5E90A6-101010,657|1205|5889A1-101010,678|1230|4E7E96-101010,638|1204|5D86A3-101010", 0.9) = 1 Then 
+        Tap 662, 1209
+        Goto 退出
+    End If
+
+    If CmpColorEx("591|1218|E1F3F7-101010,625|1221|DBFCFD-101010,634|1225|C8EDFD-101010,638|1212|D7FAFC-101010",0.9) = 1 Then
+        Tap 638, 1212
+        Goto 退出
+    End If
+    If CmpColorEx("597|921|94A7B6,584|931|AEC7D6,596|942|99AAB9,574|938|A8C3D7",0.9) = 1 and CmpColor(584,931,"AEC7D6",0.9)<> CmpColor(585,917,"AEC7D6",0.9)   Then
+        Tap 597, 921
+        Goto 退出
+    End If
+    If CmpColorEx("574|1191|D5F7FE,582|1198|D9FBFE,545|1194|DCF3FF", 0.9) = 1 and CmpColorEx("577|1187|163895,590|1196|183691,570|1194|113A9F", 0.9) = 1 Then 
+        Tap 574, 1191
+        Goto 退出
+
+
+    End If
+
+    If CmpColorEx("352|513|8EE0E7-101010,353|599|9AE4ED-101010,352|644|8FE0E7-101010,353|655|9AE4ED-101010,351|719|6CC3BC-101010",0.9) = 1 Then
+        Tap 352, 644
+        Delay 322
+        Goto 退出
+    End If
+    
+    Rem 退出    
+End Sub
+
+
+Sub 人物状态()
+
+
+    Dim  intX,intY,intA,intB
+    FindPic 362,447,577,980,"Attachment:fight.png","000000",0,0.9,intX,intY
+    //FindStr(267,382,603,837,"战","5EC6E8-101010|99C8E1-101010|214360-101010|212C42-101010",1,intX,intY)
+    //FindMultiColor 274,410,602,970,"456968","9|8|C5DBE3,14|17|808991,12|24|203535-101010",4,1,intA,intB
+    FindPic 362,447,577,980,"Attachment:find.png","000000",0,0.7,intA,intB
+
+    If intX > -1 And intY > -1  Or   intA > -1 And intB > -1  Then
+        Tap  240,1049
+ 
+    End If
+
+
+End Sub
+
+//Sub 交接任务()
+//	
+//Rem 迭代 
+//Dim intX,intY
+//fx3  39,260,650,1041  fx4
+//FindMultiColor 101,850,339,1279 ,"408A7A-101010","-2|11|427495-101010,4|12|5A9BA4-101010",4,1,intX,intY
+//
+//FindMultiColor 141,833,394,1091,"345669","5|5|60A1A5,11|1|84C5CD",0,0.9,intX,intY
+//TracePrint "交接坐标1",intX,intY
+//If intX > -1 And intY > -1 Then
+//
+//              Tap intX, intY
+//               
+//              Delay 200
+//               Tap intX, intY
+//         
+//End If
+//
+//FindMultiColor 48,228,624,1130,"9AE4ED","-11|-8|5EB8AF,-26|6|337A6B",1,0.9,intX,intY
+//FindMultiColor 54, 241, 651, 995, "AEE0E8", "-6|3|4CA199,-22|14|4D9686", 4,0.9, intX, intY
+//TracePrint "交接坐标2",intX,intY
+//If intX > -1 And intY > -1 Then
+//
+//              Tap intX, intY
+//              
+//               If CmpColorEx("209|909|407894,208|1045|427495,208|907|427495",0.9) = 1  and CmpColorEx("226|910|4E9F98,214|916|4E9788,202|912|357767,209|1037|3A8272",0.9) = 1 Then
+//             Goto 迭代
+//            End if
+//              
+//            
+//End If
+//
+//
+//End If
+
+//
+//FindStr (107, 843, 334, 1119, "接", "D3F7FD-101010|B9E0E4-101010", 0.9, intX, intY)
+//TracePrint intX,intY
+//If intX > -1 And intY > -1 Then
+//	Tap intX, intY
+//	Delay 500
+//End If
+
+//End Sub
+Sub 判断挂机(AFK)
+    信息提示(AFK)
+    Dim a1,b1,a2,b2,a3,b3,a4,b4,w,h
+    h = GetScreenY()
+    w = GetScreenX()
+    a1 = Int(w / 2)
+    b1=Int(h/2)
+    a2 = Int(w / 3)
+    b2=Int(h/5)
+    a3 = Int(w / 6)
+    b3=Int(h/7)
+    a4 = Int(w / 2)
+    b4=Int(h/4)
+	 
+    //    Points(AFK,0)=a1  
+    //        Points(AFK,1)=b1  
+    //            Points(AFK,2)=a2  
+    //                Points(AFK,3)=b2  
+    //                    Points(AFK,4)=a3  
+    //                        Points(AFK,5)=b3  
+    //                            Points(AFK,6)=a4  
+    //                                Points(AFK,7)=b4  
+    //    
+    //
+    //     
+    //       If AFK > 30 Then 
+    //    	
+    //    
+    //    	  	if  GetPixelColor(Points(1,0),Points(1,1),3)=GetPixelColor(Points(17,0),Points(17,1),3)  and GetPixelColor(Points(3,2),Points(3,3),3)=GetPixelColor(Points(27,2),Points(27,3),3) and GetPixelColor(Points(15,6),Points(15,7),3)=GetPixelColor(Points(12,6),Points(12,7),3)  then
+    //    	  
+    //    	  IsAFK=True
+    //    	   
+    //    	   Else 
+    //    	   Points=Array()
+    //    	   AFK=0
+    //    	  End if
+    //    	
+    //    End If
+    // 
+    //
+	 
+	 
+End Sub
+
+Sub 信息提示(内容)
+
+   
+     
+    ShowMessage 内容 ,500,5,ScreenH
+
+
+    Delay 1500
+End Sub
+

@@ -1,0 +1,13 @@
+
+Dim intX,intY
+FindMultiColor 153,161,627,773,"3B5C83-101010","-25|-67|ADD5E5-101010,-37|-143|3E88C9,13|-411|152DB0,-9|-447|79DBFB,-32|-455|1324AE",4,0.9,intX,intY
+
+TracePrint "¹ºÎï",intX,intY
+
+
+If   intX > -1 And intY > -1 Then
+  
+  Tap intX,intY
+   
+	  	
+End If

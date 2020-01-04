@@ -1,0 +1,6 @@
+Dim intX,intY
+FindMultiColor 24,306,404,652, "BFB955", "-21|13|62592E,-1|25|665A2A,5|19|656232,345|-410|586257", 0, 1, intX, intY
+If intX > -1 And intY > -1 Then
+	TracePrint intX
+	TracePrint intY
+End If

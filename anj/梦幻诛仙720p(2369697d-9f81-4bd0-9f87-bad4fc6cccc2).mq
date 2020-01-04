@@ -1,0 +1,2208 @@
+//取色1DD8F9-303030 1AAEC8-050505 18ABC0-050505
+Dim intX,intY,win_x,win_y
+Dim 自动任务  = 0
+Dim 主线是否完成  = 0, 师门是否完成 = 0, 支线是否完成 = 0, 指引是否完成 = 0, 护送是否完成 = 0, 冬日温暖是否完成 = 0, 宝图任务是否完成 = 0,黑龙浩劫是否完成 = 0
+Dim 任务检测时间 = 0, 任务延时 = 0, 诛仙奇缘是否完成 = 0, 帮派是否完成 = 0, 赏金猎人是否完成 = 0, 竞技场是否完成  = 0, 还魂秘术是否完成  = 0, 乱世妖魔是否完成 = 0, 羽翼是否完成 = 0
+Dim 镇妖是否完成 = 0, 平定海波是否完成 = 0, 青云学堂是否完成 = 0, 副本45是否完成 = 0, 精英副本45是否完成, 副本60是否完成 = 0, 精英副本60是否完成 = 0, 副本75是否完成 = 0, 精英副本75是否完成 = 0
+Dim 赏月是否完成 = 0, 是否带队 = 0, 抓宠是否完成 = 0, 抓宠等级 = 0, 当前任务 = 0, 镇妖计数 = 0, 镇妖数量 = 0
+Dim 世界boss挑战 = Array("648|517|466AA0-202020,639|535|EAFFFF,88|942|2772AF,90|968|47B4E4,87|985|41B3E9,646|607|4C7DC4",0.9,90,950)
+////////////抓宠////////////////////////
+Dim 怪物血条 = Array(254,9,686,700,"FFFFFF","-31|-4|FFFFFF,-40|74|FFFFFF,-54|65|FCB862,6|2|FFFFFF,-47|2|FFF8F1",0,0.9,1,1000)
+Dim 捕捉 = Array("82|848|4A94C7,60|853|034181,76|871|28AAE0,60|867|0771C1,58|883|0A42DA,49|867|051F70",0.9,50,880)
+Dim 防御 = Array("65|1128|BEFFCE,65|1136|A5F7F6,56|1134|84F4F9,58|1147|83F4EF,54|1130|A1DFBC,67|1150|9DFBB3",0.9,50,1130)
+Dim 取消自动 = Array("78|1218|C3DDEB,53|1221|C1DBEA,42|1220|86BFDD,42|1246|85C0DF,66|1238|6BABD0,72|1238|C7ECFB",0.9,60,1230)
+Dim 混沌一层 = Array(48,188,586,390,"88D3B2","-4|22|80A1B2,22|45|A9B9B9,-3|-87|A6AEBF,0|-49|283F60,-10|-33|AE9984",0,0.9,1,1000)
+Dim 混沌二层 = Array(48,188,586,390,"6FB2A1","-7|-106|929DB1,4|14|85B195,19|6|5DCFDA,-3|25|C9FCE8,18|-47|DBDFE6",0,0.9,1,1000)
+Dim 混沌三层 = Array(48,188,586,390,"99DDEE","7|20|96DAE6,12|-117|716655,-11|-118|D4D7DF,44|-53|DADDE4,4|-27|E9BB66",0,0.9,1,1000)
+Dim 混沌四层 = Array(48,188,586,390,"D89977","8|27|C3905D,-5|80|776655,20|44|77839D,-12|37|F7F8F9,15|98|FFE565",0,0.9,1,1000)
+Dim 混沌五层 = Array(48,188,586,390,"6D7B97","-11|21|669AAB,-5|-29|66AAC2,-29|-57|707D98,-13|50|E6CD89,19|51|F9FF99",0,0.9,1,1000)
+Dim 混沌六层 = Array(48,188,586,390,"9C5599","-10|27|AE55BB,-5|55|885578,17|13|394A71,-16|-6|8E98AE,-7|-36|865388",0,0.9,1,1000)
+Dim 混沌七层 = Array(48,188,586,390,"69AA66","8|-52|83BB88,21|48|C9C0CF,5|40|9591BB,0|-34|33476B,0|-86|D9DDE4",0,0.9,1,1000)
+Dim 混沌八层 = Array(48,188,586,390,"88C5DD","1|47|77A1B2,-12|72|77AABE,-18|72|76858C,-15|13|A5B1C3,-9|-3|88CCDD",0,0.9,1,1000)
+Dim 混沌时空 = Array("664|759|F8F0DF,648|765|F4E3C0,660|764|FDDFAF,578|915|2064AA,577|1015|277CC0,584|426|334C6B",0.9,0,0)
+Dim 挂机图标 = Array("663|333|275578,653|361|597381,640|336|385876,668|345|003365,673|357|565AAA,657|328|1D5676",0.9,650,350)
+//////////////////////////////////////////////////
+Dim 好友验证 = Array("303|518|3E78AD,297|720|1D5494,296|707|86D9F7,297|574|83D6F7,481|821|CAECFF,296|753|3571A8",0.9,300,550)
+Dim 我要变强 = Array("467|535|A5C0DC,459|581|4B6498,465|619|486096,457|655|3A528C,459|678|B4D0E2,463|682|A0BAD4,456|696|708AB4,465|734|A9C4DE,470|621|4A6297,469|592|859FC1",0.9,460,970)
+Dim 挖宝 = Array("611|532|332333-505050,636|644|4C44AA,630|765|796171,550|972|A1BFF6,65|1000|4F7BE4,542|501|3750ED",0.9,719,1279)
+Dim 通关精英60 = Array( 496,426,626,679,"81BAFC","6|123|941D61,-4|140|448FC1,-1|-24|4E5FA3,-33|-23|4892E5,-25|44|471E2E,10|28|7FA1F6",0,0.9,0,0)
+Dim 通关精英45 = Array(494,190,633,431,"D4278A","2|-101|81BBFD,-13|-122|8BAAEE,-24|-111|4B7ED3,-63|-65|A7532A,-87|-94|4A3901,-9|21|7DCEF8",0,0.9,0,0)
+Dim 副本界面 = Array("109|225|5D7894,104|251|86A2BD,119|957|5BBEE4,200|932|1A5696,204|988|5FC2E6,113|989|3E96C7,655|1077|4152CF",0.9,0,0)
+Dim 同意进入副本 = Array("434|402|3B75A7,440|507|418BC7,332|384|69CC8A,340|514|64D9AA,234|455|4587C1,131|866|4FD0FF,140|890|2C76AE",0.9,140,900)
+Dim 通关60 = Array(474,350,643,685,"7EB6F8","0|15|5E9AEF,13|29|1C2D82,-24|52|7E3A3A,-58|24|5C1135,35|60|415296,-18|8|3D70C5",0,0.9,0,0)
+Dim 通关45 = Array(278,178,631,424,"82C4F7","17|23|91C5F7,-42|43|494012,-23|78|A15631,26|63|7CA2F5,-75|55|74631F,-108|32|5E4D09",0,0.9,0,0)
+Dim 副本任务 = Array("691|267|054BF5,677|256|4796F5,671|246|5385AF,680|297|C5D5EA,697|284|C6D5EA,677|527|84AFDB,654|755|6F97C3,666|567|BBD4E5",0.9,530,1060)
+Dim 寻路地图 = Array("548|109|82DC71,559|132|8DF8F9,471|130|96F9F9,633|498|749CCA,612|784|70A1D0,445|141|4EDAF7,401|184|C9E1ED",0.9,0,0)
+Dim 当前地图 = Array("669|103|6B2931,692|137|2E5083,630|139|8294A7,590|93|AFD0E0,632|161|D7EDF4,642|133|5E6987,421|126|402F37",0.9,0,0)
+Dim 领取还魂秘术 = Array("342|419|657FDD,239|722|5BD7FF,406|419|FEB521,393|327|FF85FC,413|339|E3EAF4,407|681|354D69,248|773|3C93C4",0.9,240,760)
+Dim 青云学堂 = Array("607|284|1A335C,524|354|FDFDFD,524|276|CCCCDC,554|985|C2C2D3,563|928|BAE4FF,453|981|CBCBDB,594|592|234091,483|371|455EA2",0.9,0,0)
+Dim 黑龙任务 = Array("430|1047|52D3FF,424|1072|4DBFED,427|1173|3387BD,429|1218|56D6FF,443|1048|C5F4FF,416|1046|1AA8FF,433|1222|8AE5FF,421|1214|34BBFF",0.9,520,1100)
+Dim 天降洪福  = Array("232|490|1100BB-202020,232|527|1111BB-202020,318|483|2211CC-202020,377|489|2233FF-202020,410|572|22C3FF-202020",0.9,315,580)
+Dim 黑龙浩劫界面 = Array("651|155|B6D4E6,48|160|AFCBE1,51|1103|C0DBEA,671|771|A7C0DD,653|580|6881AC,599|199|A6B5C8,592|230|E9EDF1,587|298|8FA2BA",0.9,0,0)
+Dim 领取 = Array("206|215|765D66,134|222|EAEBFB,177|320|472EE4,188|619|54BEE6,56|192|CDE6E6,244|227|D0E9E0,104|217|6D4CE0",0.9,200,600)
+Dim 获取服务器信息失败 = Array("450|530|4D647B,447|590|556C83,439|692|6D859B,419|636|B0CBDE,274|614|86DCF7,510|394|B0CBDE,296|402|C4DEEB,271|664|66BEE4,402|725|395068,434|747|6F879D",0.9,280,650)
+Dim 与qq好友玩 = Array("620|562|BBEEFF,596|672|66DDFF,124|749|14386F,135|763|91A9C0,118|791|74CDF3,139|825|F16E36,122|844|9EE2FE,122|857|6EA3C5",0.9,130,760)
+Dim qq登陆 = Array("319|67|FFFFFF,335|71|FFFEFB,378|67|F5B712,399|67|FFFAEC,329|934|F2B91E,350|926|FFFFFE,378|933|F2B91E,377|932|FCEDC4",0.9,320,920)
+Dim 登陆游戏 = Array("119|544|70B5F1,127|569|0E3F7B,114|584|367DB1,132|600|DAFAFF,106|735|52A2ED,127|698|BDEEFF,104|636|48ACF2,130|622|174C82",0.9,120,630)
+Dim 知道了 = Array("623|237|AEAEBF,606|1043|A3A3B4,652|543|7EACD3,67|686|3C5FED,640|707|88BBE3,643|626|3678CA",0.9,70,630)
+Dim 我玩过 = Array("283|478|91EAFF,426|492|748CA3,422|579|B9D2E3,439|612|213D8F,435|653|3A559D,423|724|3E599F,430|720|294593,388|715|A2BBCE",0.9,270,500)
+Dim 活跃度提醒 = Array("579|451|B3CEE1,580|752|B5D0E2,234|556|58D6FF,230|641|1F5E9C,479|341|726AED,381|355|857CF4,372|340|FDFDFF",0.9,230,600)
+Dim 奖励 = Array("583|133|6E90C7,573|134|EDF4F8,568|126|3B7ECE,569|159|0D5BCB,562|153|80A2D1,564|155|F2F8FA,562|131|8FA3BF,565|130|F2F8FA,580|156|0C61C7",0.9,0,0)
+Dim 任务界面 = Array("694|41|A3D7BF,654|59|3A588C,663|13|3A588C,676|43|2C66EE,661|49|8EB787,668|24|588538",0.9,0,0)
+Dim 活动日程 = Array("166|194|C3DCEE,103|196|91B9D9,101|250|D1EAFA,92|277|689BC5,142|245|A7DAF3,157|259|608AB8,157|271|205493,89|266|9FD0EA",0.9,0,0)
+Dim 防具店 = Array("644|717|F2F7F7,656|719|7F6EF6,655|739|9A9AE4,638|739|3939BD,643|766|10CEF6,619|803|237DF1,125|915|2F7AB2,124|918|1A5394,117|924|50D0FF,114|940|1B5899",0.9,130,920)
+Dim 任务物品给予 = Array("122|897|63DEFF,113|918|185193,116|924|62D9FB,116|940|56C2E9,111|955|174F91,104|1010|1D9BFA,638|1127|4C62D3,634|822|A5C0DC",0.9,120,950)
+Dim 任务框 = Array("35|1203|C3DEEB,40|1207|99BDDB,44|1209|B8CEE3,48|1216|A8C9E1,34|1224|D9EAF2,57|1225|9DC0DD,37|1214|A2C5DF,470|1241|73A1E7",0.9,0,0)
+//Dim 任务图标 = Array("602|1258|4FABDB,578|1254|92CBE4,588|1272|52A7D2,604|1258|84DBF2,574|1262|8BC3E1,580|1251|8CD2E9,601|1252|A6F2FD,590|1275|5EA7D6",0.9,0,0)
+Dim 任务图标 = Array("609|1041|43C2EC,589|1043|8E7425,573|1041|41BFEB,587|1058|74A0BF,579|1066|BBA130",0.9,0,0)
+Dim 战斗界面 = Array("682|31|9AB9D8,671|43|7F9EBA,662|74|90B4F4,657|48|B8D5EA,646|36|254C78,634|40|9FBEDB,670|65|CADFFD,664|82|86B0F1",0.9,0,0)
+Dim 逛摊购买 = Array("630|214|AFEDFF,607|761|F9F9F9,648|1098|4558C6,616|919|C2E7FD,81|935|53D3FF,78|250|F7F7F8",0.9,0,0)
+Dim 需 = Array("535|420|6E1F93,532|426|3D0070,523|415|EBB2FF,533|438|8D5FB7,532|427|5D128F,536|423|913DB3",0.9,0,0)
+Dim 宠物购买 = Array("87|962|61DCFF,78|969|2873AF,649|532|3B7BD9,675|756|FCFCFC,636|754|65BAED,636|564|597EA8,642|556|C8D7EC,637|532|2366C9",0.9,80,950)
+Dim 任务宠物 = Array("75|879|37AFFB,74|1037|C4DEEB,260|730|73A2DB,260|1152|73A1DA,627|905|4D69A8,34|828|78A8E3,67|819|C4DEEB,626|1138|75A4E9",0.9,80,900)
+Dim 自动战斗 = Array("77|1220|CFE9F6,73|1216|CCEAF8,71|1227|BBE2F5,65|1216|86D7FA,65|1227|78C5E9,78|1221|B0CADD",0.9,70,1230)
+Dim 自动战斗1 = Array("77|1220|CBE5F2,70|1216|B5E5FA,67|1227|8ED2F1,72|1220|C5EAFA,73|1235|BEDDED,69|1236|7FB1CF",0.9,70,1230)
+Dim 采集 = Array("268|484|8CCFFF,265|500|8FCDFF,246|822|B7EEFF,255|819|84CBF5,233|836|92D4FF,233|628|53A1E9,274|778|ABECFF,274|798|AAEBFE",0.9,0,0)
+Dim 左手指 = Array( 0,0,0,0,"B1D9FF","-7|36|5C8EE2,-15|43|D3F4FF,-22|51|B4D5FB,-25|68|C8FEFF,-2|54|78B9EC,6|65|436C9F,25|65|84BBFD,25|44|9EC8FF,-9|90|8FD4F2",0,0.9,0,0)
+Dim 右手指 = Array(0,0,0,0,"003768","12|-45|B6D8FA,23|-53|BDE1FF,21|-92|9AD5E6,16|-111|7AB6E1,2|-93|87D0F2,-13|-115|8CD4FA,-20|-71|8ABEFB,-4|-77|D1FFFF,-2|-62|81D6FD",0,0.9,0,0)
+Dim 上手指 = Array(0,0,0,0,"ACCDFE","-57|-28|7CC3EA,-70|-30|ACF0FC,-82|-27|83C1E7,-38|23|9EC8FE,-59|22|91C3FD,-66|11|567FAB,-74|1|6BAFDF,-56|-9|78B2E3,-40|-16|C6E8FF",0,0.9,0,0)
+Dim 下手指 = Array(0,0,0,0,"ADD4FF","39|-25|9EC8FF,72|-20|658EC8,109|-7|84CEF7,106|16|86BBDF,74|29|BBF5FE,53|28|8EB4E9,58|-1|75C3EC,38|13|CBE3FF,88|13|E7FFFF",0,0.9,0,0)
+Dim 任意地方继续 = Array("680|1271|ADCFFA,692|1255|FFFFFF,700|1251|EFFAFF,700|1238|FFFFFF,680|1236|FFFFFF,680|1249|FFFFFF",0.9,0,0)
+Dim 跳过剧情 = Array("679|1271|B0D1FC-303030,675|1247|9FC5F2-303030,687|1230|DEE6F8-303030,695|1226|DEE6F8-303030,676|1225|E0E6F5-303030,698|1216|C8DAF4-303030,678|1212|DDE5F3-303030",0.9,0,0)
+Dim 魔音娃娃 = Array("177|604|63DEFF,181|636|65E0FF,176|656|64DEFF,162|691|2AB3FF,158|820|B8CEE3,168|456|B7CFE3,237|679|243E5D,447|771|B0D1E2",0.9,170,630)
+Dim 使用 = Array("356|1161|C6EAFF,289|1016|90A7BA,272|1174|879CAF,364|1092|748592,124|1160|9AB4CA,364|1153|79A8F8",0.9,160,1100)
+Dim 一键申请 = Array("236|905|41669D,234|909|64DCFC,224|907|4FB1DF,224|918|4379AF,229|935|4C8DBD,233|936|65E0FF,234|930|4C8CBB,222|922|4AACDF,594|1041|8DBFD8,640|1085|6982DF",0.9,230,900)
+Dim 通用确定 = Array("516|397|B7CEE3,513|878|BBD2E5,265|396|B3CDE3,265|880|BED8E8,293|443|38B1FB,296|829|4BCDFF,390|874|A3C2DA,378|861|96B3CD",0.9,0,0)
+Dim 关闭聊天 = Array("52|42|C3DBEC,55|57|5C8DC7,358|536|5498CB,348|552|2F7FC3,372|550|8EBFE0,357|551|BEE6FA,329|559|C4DCED,382|563|C4DCED",0.9,360,550)
+Dim 问答活动 = Array("538|368|497AAC,534|514|335486,541|767|3F70A2,539|863|214365,217|405|C4DEEB,219|861|C4DEEB,322|844|96B3CD,326|418|96B3CD",0.9,220,500)
+Dim 诛仙奇缘 = Array("618|765|7DA4C3,612|252|3767A0,608|409|E3E3F0,609|887|B1D0EA,653|1066|5B71D6,602|869|D9EFF4,596|782|692FF5,634|773|9A9AE7",0.9,0,0)
+Dim 有队伍 = Array("587|987|A6C9DF,592|1001|D9F4FF,575|967|3683D4,605|1024|76DDE6,563|1021|4293DA,614|985|82E7E7",0.9,0,0)
+Dim 队伍图标 = Array("599|1165|7984F9,589|1155|B7E5FE,575|1160|4E5DF1,585|1188|99DCFA,591|1216|CFF1FF,573|1153|8686DB",0.9,0,0)
+Dim 明日登陆 = Array("563|331|5DC0DF,547|343|A6FFFF,507|290|172EE4,546|269|2F40F4,584|321|FE97D5,524|346|FA47B1",0.9,550,1000)
+Dim 活动图标 = Array("663|424|828CD1,662|443|5860F0,656|451|4851AC,671|433|A6D0FF,670|451|79B5FF,664|419|0B138A",0.9,0,0)
+Dim 特殊护送 = Array("151|952|2F619C,137|955|1D5292,141|962|88ACCD,136|969|33649E,154|982|3A6AA2,152|991|4A77AA,148|1010|265997,143|1035|82A7CA,137|1050|5582B2,147|1055|1F5493",0.9,150,950)
+Dim 诛仙奇缘图标 = Array(148,329,557,994,"46CAFF","9|-200|EEFFFF,-9|-209|4566C3,-20|-211|EEEEEE,-23|-200|FFFFFD,-36|-227|132D57,-38|-198|657077",4,0.8,1,1000)
+Dim 冬日温暖图标 = Array(148,329,557,994,"4ACEFF","-7|-209|97DFFF,-20|-235|6428FD,-25|-190|5522E5,-12|-194|66DDFF,12|-214|6624D4,-45|-244|4624B7,-46|-202|6733DE",4,0.8,1,1000)
+Dim 宝图图标 = Array(136,319,567,1001,"4DCFFF","-3|-203|9CF2FD,-23|-187|4EFFFF,-1|-241|6EFFFF,-22|-236|DEFDFD,-43|-237|002EA9,-15|-219|57BDE7,-25|-207|55CCFF,-8|-189|B4FFFF,-35|-218|88EEFF",0,0.8,1,1000)
+Dim 帮派图标 = Array(149,321,564,1006,"7BE1FF","-8|-194|45B3FD,-32|-193|4FC67E,-42|-199|382EFC,-23|-224|3863FF,-41|-231|56D9FF,-8|-202|1C52BF,-16|-232|74FCFF",0,0.8,1,1000)
+Dim 黑龙浩劫图标 = Array(138,327,574,1007,"4DCFFF","7|-204|112258,-22|-210|99DDEE,-38|-226|8B969C,-17|-206|99DDEE,-41|-214|111B85,-19|-205|99DDEE",4,0.8,1,1000)
+Dim 赏金猎人图标 = Array(141,321,566,1037,"5CD9FF","-12|-194|0000D1,-25|-224|1055D7,-14|-239|88EEFF,-5|-203|FFFFFA,-40|-194|0055AA,-48|-213|00309A",4,0.8,1,1000)
+Dim 竞技场图标 = Array(134,318,570,1007,"3DC3FF","-2|-205|A97655,-22|-229|5959EE,-30|-241|FBECEB,-41|-203|AAAA9C,-3|-205|996644,-6|-201|CBBA4B",4,0.8,1,1000)
+Dim 还魂秘术图标 = Array(142,322,574,978,"38C0FF","-12|-205|AC460B,-4|-216|ECD9B3,5|-222|EED821,-34|-240|0099CC,-40|-207|42F4FA,-3|-223|FFFDE7",4,0.8,1,1000)
+Dim 乱世妖魔图标 = Array(135,324,562,1005,"68DCFF","-4|-201|FF88DD,-38|-237|DD88AA,-23|-219|FF5CB1,-17|-228|F6598D,0|-218|FF4499",4,0.9,1,1000)
+Dim 镇妖图标 = Array(140,324,575,1003,"51D2FF","-22|-193|D4DDD4,-45|-200|2A26CA,-41|-209|B9AB11,-26|-234|996633,-8|-236|7499C8,-10|-214|E8D7ED",0,0.8,1,1000)
+Dim 平定海波图标 = Array(140,324,575,1003,"45CAFF","-22|-227|EEEE22,-6|-212|23DDFF,-23|-203|F9F9BA,-32|-223|FFFFBE,-32|-239|94610C,-31|-222|FFFFF2",0,0.8,1,1000)
+Dim 青云学堂图标 = Array(139,322,568,1002,"2EB8FF","-7|-196|BBEE88-050505,-10|-219|BFBF32-050505,-12|-236|AAA854,-32|-231|9FD276,-11|-243|F6FEA3",0,0.8,1,1000)
+Dim 赏月图标 = Array(140,324,549,1003,"27B2FF-105050","-13|-205|66CCE9,-3|-235|2F4480,-24|-206|66587A,-20|-238|2280BA,8|-243|220056,5|-206|66DDFF",0,0.8,1,1000)
+///////////////队伍//////////////////
+Dim 队伍对话框 = Array(578,118,605,158,"队","1064D8-505050",0.8)
+Dim 退出队伍 = Array(66,231,93,336,"退出队伍","1064D8-505050",0.8)
+Dim 离开队伍 = Array(396,484,417,576,"离开队伍","27405E-303030",0.8)
+Dim 匹配目标 = Array(599,743,624,793,"匹配目标","2E4A97-303030",0.8)
+Dim 创建队伍 = Array(65,930,92,960,"创建队伍","195293-303030",0.8)
+Dim 仙侣5 = Array("479|389|DEFAFD,504|402|E6FAFF,490|399|6598CB,481|395|F2FAFF,493|409|DBEBF3,506|398|80A3C0",0.9,0,0)
+Dim 仙侣3 = Array("502|562|69ADDC,496|575|8EBAE2,486|578|90B9DA,481|573|9BACCE,474|570|EEF5F9,507|573|82A4C6",0.9,0,0)
+
+Function 输出(内容)
+    //ShowMessage 内容
+    TracePrint 内容
+End Function
+
+Dim 包名
+Dim 重启检测时间 = 0, 其他检测时间 = 0
+Function 等待找字(数组)
+    For 20
+        Delay 500
+        FindStr 数组(0), 数组(1), 数组(2), 数组(3), 数组(4), 数组(5), 数组(6), IntX, intY
+        If intX > -1 Then 
+            等待找字 = True
+            Exit Function
+        End If
+		
+    Next
+End Function
+
+Function 等待多点比色(数组)
+    For 20
+        Delay 500
+        If CmpColorEx(数组(0), 数组(1)) = 1 Then 
+            等待多点比色 = True
+            Exit Function
+        End If
+       
+    Next
+End Function
+
+Function 找字(数组)
+    FindStr 数组(0), 数组(1), 数组(2), 数组(3), 数组(4), 数组(5), 数组(6), IntX, intY
+    If intX > -1 Then 
+        找字 = True
+    End If
+End Function
+
+Function 多点找色(数组)
+    
+    FindMultiColor 数组(0), 数组(1), 数组(2), 数组(3), 数组(4), 数组(5), 数组(6), 数组(7), IntX, intY
+    If intX > -1 And intY > -1 Then 
+        多点找色 = True
+        If 数组(8) = 1  Then Tap intX, intY
+        If 数组(9)>0 Then Delay 数组(9)
+        
+    End If		
+End Function
+
+
+Function 多点比色(数组)
+   
+    If CmpColorEx(数组(0), 数组(1)) = 1 Then
+        多点比色 = True
+        If 数组(2) > 0 And 数组(3) > 0 Then  Tap 数组(2),数组(3)
+    End If		
+End Function
+
+
+Sub 诛仙奇缘答题
+    Tap 330,630
+End Sub
+Sub 青云学堂答题
+    Tap 300,500
+End Sub
+
+Sub 读取配置
+	
+    当前任务 = 0
+    If ReadUIConfig("主线", false) = False Then
+        主线是否完成 = 1
+    Else  
+        主线是否完成 = 0
+    End If
+    
+   
+    
+    If ReadUIConfig("师门", false) = False Then 
+        师门是否完成 = 1
+    Else 
+        师门是否完成 = 0
+    End If
+    
+    If ReadUIConfig("支线", false) = False Then 
+        支线是否完成 = 1
+    Else 
+        支线是否完成 = 0
+    End If
+    
+    If ReadUIConfig("指引", false) = False Then 
+        指引是否完成 = 1
+    Else 
+        指引是否完成 = 0
+    End If
+    
+    If ReadUIConfig("帮派", false) = False Then 
+        帮派是否完成 = 1
+    Else 
+        帮派是否完成 = 0
+    End If
+    
+    If ReadUIConfig("护送", false) = False Then 
+        护送是否完成 = 1
+    Else 
+        护送是否完成 = 0
+    End If
+    
+    If ReadUIConfig("诛仙奇缘", false) = False Then 
+        诛仙奇缘是否完成 = 1
+    Else 
+        诛仙奇缘是否完成 = 0
+    End If
+    If ReadUIConfig("青云学堂", false) = False Then 
+        青云学堂是否完成 = 1
+    Else 
+        青云学堂是否完成 = 0
+    End If
+    If ReadUIConfig("冬日温暖", false) = False Then 
+        冬日温暖是否完成 = 1
+    Else 
+        冬日温暖是否完成 = 0
+    End If
+    If ReadUIConfig("宝图任务", false) = False Then 
+        宝图任务是否完成 = 1
+    Else 
+        宝图任务是否完成 = 0
+    End If
+    If ReadUIConfig("黑龙浩劫", false) = False Then 
+        黑龙浩劫是否完成 = 1
+    Else 
+        黑龙浩劫是否完成 = 0
+    End If
+    If ReadUIConfig("赏金猎人", false) = False Then 
+        赏金猎人是否完成 = 1
+    Else 
+        赏金猎人是否完成 = 0
+    End If
+    If ReadUIConfig("竞技场", false) = False Then
+        竞技场是否完成 = 1
+    Else  
+        竞技场是否完成 = 0
+    End If
+    If ReadUIConfig("还魂秘术", false) = False Then
+        还魂秘术是否完成 = 1
+    Else  
+        还魂秘术是否完成 = 0
+    End If
+    
+    If ReadUIConfig("乱世妖魔", false) = False Then 
+        乱世妖魔是否完成 = 1
+    Else 
+        乱世妖魔是否完成 = 0
+    End If
+ 
+    
+    If ReadUIConfig("羽翼", false) = False Then 
+        羽翼是否完成 = 1
+    Else 
+        羽翼是否完成 = 0
+    End If
+    
+    If ReadUIConfig("赏月", false) = False Then 
+        赏月是否完成 = 1
+    Else 
+        赏月是否完成 = 0
+    End If
+    
+  
+    If ReadUIConfig("镇妖", false) = False Then 
+        镇妖是否完成 = 1
+    Else 
+        镇妖是否完成 = 0
+    End If
+    If ReadUIConfig("平定海波", false) = False Then 
+        平定海波是否完成 = 1
+    Else 
+        平定海波是否完成 = 0
+    End If
+    
+    If ReadUIConfig("45级副本", false) = False Then 
+        副本45是否完成 = 1
+    Else 
+        副本45是否完成 = 0
+    End If
+    
+    If ReadUIConfig("45级精英副本", false) = False Then 
+        精英副本45是否完成 = 1
+    Else 
+        精英副本45是否完成 = 0
+    End If
+    
+    If ReadUIConfig("60级副本", false) = False Then 
+        副本60是否完成 = 1
+    Else 
+        副本60是否完成 = 0
+    End If
+    
+    If ReadUIConfig("60级精英副本", false) = False Then 
+        精英副本60是否完成 = 1
+    Else 
+        精英副本60是否完成 = 0
+    End If
+    
+    If ReadUIConfig("75级副本", false) = False Then 
+        副本75是否完成 = 1
+    Else 
+        副本75是否完成 = 0
+    End If
+    
+    If ReadUIConfig("75级精英副本", false) = False Then 
+        精英副本75是否完成 = 1
+    Else 
+        精英副本75是否完成 = 0
+    End If
+    
+    If ReadUIConfig("75级精英副本", false) = False Then 
+        精英副本75是否完成 = 1
+    Else 
+        精英副本75是否完成 = 0
+    End If
+    If ReadUIConfig("抓宠", false) = False Then 
+        抓宠是否完成 = 1
+    Else 
+        抓宠是否完成 = 0
+    End If
+    镇妖数量 = ReadUIConfig("镇妖数量", 3)
+    输出 "镇妖数量" & 镇妖数量
+    抓宠等级 = ReadUIConfig("抓宠等级", 0) 
+    输出 "抓宠等级" & 抓宠等级
+    是否带队 = ReadUIConfig("带队", 1) 
+    输出 "带队" & 是否带队
+   
+End Sub
+
+
+
+
+Function 重启
+    
+    If TickCount() - 重启检测时间 < 5000 Then Exit Function
+    重启检测时间 = TickCount()
+    
+    
+    包名 = Sys.GetFront()
+    If 包名 = "com.tencent.tmgp.mhzxsy" Then 
+        
+    Else 
+        输出 包名
+        RunApp "com.tencent.tmgp.mhzxsy"
+        输出 "重启"
+        重启 = 1
+        Delay 5000
+    End If
+   
+    If 多点比色(获取服务器信息失败) = True Then 
+        输出 "获取服务器信息失败"
+        Delay 5000
+    End If
+    If 多点比色(与qq好友玩) = True Then 
+        输出 "与qq好友玩"
+        Delay 5000
+    End If
+    If 多点比色(qq登陆) = True Then 
+        输出 "qq登陆"
+        Delay 5000
+    End If
+    If 多点比色(登陆游戏) = True Then 
+        输出 "登陆游戏"
+        Delay 12000
+    End If
+    
+End Function
+
+Function 通用
+    通用 = True
+    If 添加还魂秘术() = True Then Goto 退出
+    FindStr(105,876,130,987,"邀请赏月","1064D8-505050",0.8,intX,intY)
+    If intX > -1 And intY > -1 Then
+        Tap 610, 1080
+        输出 "关闭赏月"
+        Goto 退出
+    End If
+    FindStr(579,112,604,149,"羽","1064D8-505050",0.8,intX,intY)
+    If intX > -1 And intY > -1 Then 
+        Tap 650, 1100
+        输出 "关闭羽翼"
+        Goto 退出
+    End If
+    If 多点比色(黑龙浩劫界面) = True Then 
+        If CmpColorEx("593|321|E9EDF2,591|332|CBD4DF,593|338|D2DAE4,598|335|E6EAEF,585|336|C0CBD8,591|335|5C789B",0.9) = 1 Then
+            输出 "黑龙浩劫已完成"
+            黑龙浩劫是否完成 = 1
+            Tap 650, 1125
+            Goto 退出
+        End If
+        For 3
+            
+            Delay 500
+            FindMultiColor 68,176,569,1095,"8FBB46","5|37|83CC4A,-29|-23|97D851,-20|66|A7D250",0,0.9,intX,intY
+            If intX > -1 And intY > -1 Then 
+                Tap intX, intY
+                输出 "黑龙浩劫"
+                Exit For
+            End If
+        Next
+        
+        For 5
+           
+            Delay 1000
+            If CmpColorEx("232|909|398DC0,212|910|309FDE,228|922|50B8E1,225|887|59D7FF,223|962|5EDBFF,218|922|41ADE1,219|935|1C5898",0.9) = 1 Then
+                Tap 220,930
+                输出 "挑战"
+                Delay 1000
+                Goto 退出
+            End If
+        Next
+        Tap 650, 1125
+        Goto 退出
+    End If
+    
+    If 多点比色(青云学堂) = True Then 
+        If 青云学堂是否完成 = 0 Then 
+            青云学堂答题 
+        Else 
+            Tap 560,930
+        End If
+        Goto 退出
+    End If
+    
+    If 多点比色(诛仙奇缘) = True Then 
+        If 诛仙奇缘是否完成 = 0 Then 
+            诛仙奇缘答题 
+        Else 
+            Tap 650,1080
+        End If
+        Goto 退出
+    End If
+	
+    If 多点比色(跳过剧情) = True Then 
+        Tap win_x - 1, win_y - 1
+        输出 "跳过剧情"
+        Goto 退出
+    End If
+    If 多点比色(任意地方继续) = True Then 
+        For 15
+            Tap win_x - 1, win_y - 1
+            输出 "任意地方继续"
+            Delay 100
+            If 多点比色(任意地方继续) <> True Then Exit Function
+        Next
+        Goto 退出
+    End If
+    If 多点比色(逛摊购买) = True Then 
+        If 多点比色(需) <> True Then 
+            Tap 500, 900
+            Delay 1000
+        End If
+        Tap 90, 950
+        Delay 1000
+        Tap 650,1100
+        输出 "逛摊购买"
+        Goto 退出
+    End If
+    If 多点比色(世界boss挑战) = True Then
+        输出 "世界BOOS挑战"
+        Goto 退出
+    End If
+    If 找字(队伍对话框) = True Then 
+        Tap 650, 1080
+        输出 "关闭队伍"
+        Goto 退出
+    End If
+    If 多点比色(天降洪福) = True Then
+        输出 "天降洪福"
+        Goto 退出
+    End If
+    If 多点比色(领取) = True Then
+        输出 "领取"
+        Goto 退出
+    End If
+    If 多点比色(关闭聊天) = True Then
+        输出 "关闭聊天"
+        Goto 退出
+    End If
+    If 多点比色(挖宝) = True Then 
+        Tap 300, 740
+        输出 "挖宝"
+        Goto 退出
+    End If
+   
+    If 多点比色(通用确定) = True Then 
+        Tap 300, 740
+        输出 "通用确定"
+        Goto 退出
+    End If
+    If 多点比色(一键申请) = True Then 
+        输出 "一键申请"
+        Delay 1000
+        Tap 635, 1080
+        Goto 退出
+    End If
+    If 多点比色(明日登陆) = True Then 
+        输出 "明日登陆"
+        Goto 退出
+    End If
+   
+    If 多点比色(同意进入副本) = True Then 
+        输出 "同意进入副本"
+        Goto 退出
+    End If
+    If 多点比色(问答活动) = True Then 
+        输出 "普天同庆"
+        Goto 退出
+    End If
+    If 多点比色(魔音娃娃) = True Then 
+        输出 "魔音娃娃"
+        Goto 退出
+    End If
+    If 多点比色(宠物购买) = True Then 
+        输出 "宠物购买"
+        Goto 退出
+    End If
+    If 多点比色(任务宠物) = True Then 
+        输出 "任务宠物"
+        Goto 退出
+    End If
+    If 多点比色(任务物品给予) = True Then 
+        输出 "任务物品给予"
+        Goto 退出
+    End If
+    If 多点比色(防具店) = True Then 
+        输出 "防具店"
+        Goto 退出
+    End If
+    If 多点比色(活跃度提醒) = True Then 
+        输出 "活跃度提醒"
+        Goto 退出
+    End If
+    If 多点比色(活动日程) = True Then 
+        Tap 640,1080
+        输出 "关闭活动日程"
+        Goto 退出
+    End If
+    If 多点比色(知道了) = True Then 
+        输出 "知道了"
+        Goto 退出
+    End If
+    If 多点比色(我玩过) = True Then 
+        输出 "我玩过"
+        Goto 退出
+    End If
+    If 多点比色(奖励) = True Then 
+    	
+        领取奖励
+        Goto 退出
+    End If
+    
+    FindPic 0,0,0,0,"Attachment:左.png","000000",1,0.8,intX,intY
+    If intX > -1 And intY > -1 Then
+        输出 "左手指"
+        Tap intX, intY - 100
+        Goto 退出
+    End If
+    FindPic 0,0,0,0,"Attachment:右.png","000000",1,0.8,intX,intY
+    If intX > -1 And intY > -1 Then
+        输出 "右手指"
+        Tap intX, intY + 209
+        Goto 退出
+    End If
+    
+    FindPic 0,0,0,0,"Attachment:上.png","000000",1,0.8,intX,intY
+    If intX > -1 And intY > -1 Then
+        输出 "上手指" & intX & intY
+        Tap intX + 212, intY
+        Goto 退出
+    End If
+    FindPic 0,0,0,0,"Attachment:下.png","000000",1,0.8,intX,intY
+    If intX > -1 And intY > -1 Then
+        输出 "下手指"
+        Tap intX - 100, intY
+        Goto 退出
+    End If
+    通用 = False
+    Exit Function
+    Rem 退出
+   
+End Function
+
+
+
+Function 查找主线
+    Dim x,y
+    If 多点比色(任务图标) <> True Then 
+        查找主线  = True
+        Exit Function
+    End If
+   
+    FindStr(256,1030,556,1098,"主线","F0A7EB-505050",0.7,intX,intY)
+    If intX > -1 And intY > -1 Then
+        查找主线 = True
+        x = intX
+        y = intY
+        FindStr(x-40,1173,x,1228,"点击","097EF0-505050",0.6,intX,intY)
+        If intX > -1 And intY > -1 Then
+            输出 "等级不够" & intX & intY
+            主线是否完成 = 1
+            重置时间
+        Else 
+            任务检测时间 = TickCount()
+            任务延时 = 10000
+            输出 "主线" & x& y
+            Tap x, y
+        End If
+    End If
+    
+End Function
+
+Function 下滑
+ 
+    TouchDown 500, 1100, 1
+    Delay 800
+    If CmpColor(500, 1271, "8AC1DB", 0.8) > -1 Then 
+        //  TracePrint "aaaa"
+        TouchMove 350,1100,1,500
+        TouchUp 1
+        Delay 700
+    Else 
+        TouchUp 1
+        Delay 500
+        Swipe 470,1100, 320,1100, 1200
+    End If
+     
+End Function
+
+Function 上滑
+   
+    TouchDown 446, 59, 1
+    Delay 800
+    If CmpColor(500, 1271, "8AC1DB", 0.8) > -1 Then 
+        //  TracePrint "aaaa"
+        TouchMove 650,1100,1,1200
+        TouchUp 1
+    Else 
+        TouchUp 1
+        Delay 500
+        Swipe 470,1100, 620,1100, 1200
+    End If
+     
+  
+End Function
+
+Function 主线任务
+	 
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+    If 查找主线() = True Then Exit Function
+    For 3
+        下滑 
+        
+        If 查找主线() = True Then Exit Function
+    Next
+    For 3
+        上滑 
+        
+        If 查找主线() = True Then Exit Function
+    Next
+    主线是否完成 = 1
+    输出 "没找到主线"
+    重置时间
+End Function
+
+Function 查找羽翼
+    If 多点比色(任务图标) <> True Then 
+        查找羽翼  = True
+        Exit Function
+    End If
+    
+    FindStr(219,1030,560,1083,"羽翼","1DD8F9-303030|1AAEC8-050505|18ABC0-050505",0.6,intX,intY)
+    If intX > -1 And intY > -1 Then
+        查找羽翼 = True
+        
+        任务检测时间 = TickCount()
+        任务延时 = 10000
+        输出 "点击羽翼"
+        Tap intX, intY
+    End If
+    
+End Function
+Function 羽翼任务
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+    If 查找羽翼() = True Then Exit Function
+    For 3
+        下滑
+        If 查找羽翼() = True Then Exit Function
+        
+    Next
+    For 3
+        上滑
+        If 查找羽翼() = True Then Exit Function
+    
+    Next
+    羽翼是否完成 = 1
+    输出 "羽翼已完成"
+    重置时间
+End Function
+
+Function 查找师门
+    If 多点比色(任务图标) <> True Then 
+        查找师门  = True
+        Exit Function
+    End If
+    
+    FindStr(219,1030,560,1083,"师门","1DD8F9-303030|1AAEC8-050505|18ABC0-050505",0.7,intX,intY)
+    If intX > -1 And intY > -1 Then
+        查找师门 = True
+        
+        任务检测时间 = TickCount()
+        任务延时 = 10000
+        输出 "点击师门"
+        Tap intX, intY
+    Else 
+        FindStr 225, 1023, 542, 1091, "师", "1DC8EA-303030", 0.5, intX, intY
+        If intX > -1 And intY > -1 Then
+            查找师门 = True
+        
+            任务检测时间 = TickCount()
+            任务延时 = 20000
+            输出 "点击师门"
+            Tap intX, intY
+        End If
+    End If
+    
+End Function
+Function 师门任务
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+    If 查找师门() = True Then Exit Function
+    For 3
+        下滑
+        If 查找师门() = True Then Exit Function
+        
+    Next
+    For 3
+        上滑
+        If 查找师门() = True Then Exit Function
+    
+    Next
+    师门是否完成 = 1
+    输出 "师门已完成"
+    重置时间
+End Function
+
+Function 查找支线
+    If 多点比色(任务图标) <> True Then 
+        查找支线  = True
+        Exit Function
+    End If
+    
+    FindStr(219,1030,560,1083,"支线","1DD8F9-303030|1AAEC8-050505|18ABC0-050505",0.7,intX,intY)
+    If intX > -1 And intY > -1 Then
+        查找支线 = True
+        
+        任务检测时间 = TickCount()
+        任务延时 = 10000
+        输出 "点击支线"
+        Tap intX, intY
+    End If
+    
+End Function
+
+Function 查找帮派
+    If 多点比色(任务图标) <> True Then 
+        查找帮派  = True
+        Exit Function
+    End If
+    
+    FindStr(219,1030,560,1083,"帮派","1DD8F9-303030|1AAEC8-050505|18ABC0-050505",0.5,intX,intY)
+    If intX > -1 And intY > -1 Then
+        查找帮派 = True
+        
+        任务检测时间 = TickCount()
+        任务延时 = 10000
+        输出 "点击帮派"
+        Tap intX, intY
+    End If
+    
+End Function
+Function 黑龙浩劫任务
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+    If 打开活动日程() <> True Then Exit Function
+    For 4
+        If 多点比色(活动日程) <> True Then Exit Function
+        If 多点找色(黑龙浩劫图标) = True Then 
+            输出 "黑龙浩劫图标"
+            任务检测时间 = TickCount()
+            任务延时 = 20000
+            自动任务 = 1
+            Exit Function
+        End If
+        Swipe 300, 450, 530, 450, 500
+        Delay 800
+    Next 
+    黑龙浩劫是否完成 = 1
+    输出 "黑龙浩劫任务已完成"
+    重置时间
+End Function
+Function 帮派任务
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+    If 查找帮派() = True Then Exit Function
+    For 3
+        下滑
+        If 查找帮派() = True Then Exit Function
+        
+    Next
+    For 3
+        上滑
+        If 查找帮派() = True Then Exit Function
+        
+    Next
+    If 打开活动日程() <> True Then Exit Function
+    
+    
+    For 4
+        If 多点比色(活动日程) <> True Then Exit Function
+        If 多点找色(帮派图标) = True Then 
+            输出 "点击帮派图标"
+            任务检测时间 = TickCount()
+            任务延时 = 20000
+            自动任务 = 1
+            Exit Function
+        End If
+        Swipe 300, 450, 530, 450, 500
+        Delay 1000
+    Next 
+    帮派是否完成 = 1
+    输出 "帮派任务已完成"
+    重置时间
+End Function
+
+Function 支线任务
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+    If 查找支线() = True Then Exit Function
+    For 3
+        下滑
+        If 查找支线() = True Then Exit Function
+        
+    Next
+    For 3
+        上滑
+        If 查找支线() = True Then Exit Function
+        
+    Next
+    支线是否完成 = 1
+    输出 "支线已完成"
+    重置时间
+End Function
+
+
+Function 查找指引
+    If 多点比色(任务图标) <> True Then 
+        查找指引  = True
+        Exit Function
+    End If
+    
+    FindStr(219,1030,560,1083,"指引","1DD8F9-303030|1AAEC8-050505|18ABC0-050505",0.7,intX,intY)
+    If intX > -1 And intY > -1 Then
+        查找指引 = True
+        
+        任务检测时间 = TickCount()
+        任务延时 = 10000
+        输出 "点击指引"
+        Tap intX, intY
+    End If
+   
+End Function
+
+Function 指引任务
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+    If 查找指引() = True Then Exit Function
+    For 3
+        下滑
+        If 查找指引() = True Then Exit Function
+        
+    Next
+    For 3
+        上滑
+        If 查找指引() = True Then Exit Function
+        
+    Next
+    指引是否完成 = 1
+    输出 "指引已完成"
+    重置时间
+End Function
+
+Function 护送任务
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+    If 打开活动日程() <> True Then Exit Function
+    For 3
+        If 多点比色(活动日程) <> True Then Exit Function
+        FindMultiColor 154,337,564,1016,"46CAFF","-15|-208|00115A,-22|-243|4481B8,-38|-230|938360,-29|-187|29DBFE,6|-195|2222DD,-21|-209|2347FF,-39|-202|6A8287",4,0.9,intX,intY
+        If intX > -1 And intY > -1 Then
+            Tap intX, intY
+            输出 "点击护送图标"
+            任务检测时间 = TickCount()
+            任务延时 = 90000
+            自动任务 = 1
+            Exit Function
+        End If
+        Delay 1000
+    Next 
+    护送是否完成 = 1
+    输出 "护送已完成"
+    重置时间
+End Function
+
+Function 青云学堂任务
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+    
+    If 打开活动日程() <> True Then Exit Function
+ 
+    For 3
+        If 多点比色(活动日程) <> True Then Exit Function
+        If 多点找色(青云学堂图标) = True Then 
+            任务检测时间 = TickCount()
+            任务延时 = 5000
+            Exit Function
+        End If 
+        Delay 1000
+    Next 
+    青云学堂是否完成 = 1
+    输出 "青云学堂已完成"
+End Function
+Function 诛仙奇缘任务
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+    
+    If 打开活动日程() <> True Then Exit Function
+ 
+    For 3
+        If 多点比色(活动日程) <> True Then Exit Function
+        If 多点找色(诛仙奇缘图标) = True Then 
+            任务检测时间 = TickCount()
+            任务延时 = 5000
+            Exit Function
+        End If 
+        Delay 1000
+    Next 
+    诛仙奇缘是否完成 = 1
+    输出 "诛仙奇缘已完成"
+    
+End Function
+Sub 重置时间
+    If 自动任务 = 0 Then
+        任务检测时间 = 0
+        任务延时 = 0
+    Else 
+        任务检测时间 = TickCount()
+        任务延时 = 10000
+    End If
+    其他检测时间 = TickCount()
+End Sub
+
+
+Function 是否自动寻路
+    Dim x,y,x1,y1,是否移动
+    If 多点比色(任务界面) <> True Then Exit Function
+    是否移动 = 0
+    FindColor 641,125,650,139,"F0EFF2",0,0.9,intX,intY
+    If intX >-1 then
+        // Traceprint "找到"
+        x = intX
+        y = intY
+            
+    Else
+        //  Traceprint "没有找到"
+        Exit Function
+    End If
+        
+    FindColor 652,126,658,138,"F0EFF2",7,0.9,intX,intY
+    If intX >-1 then
+        //  Traceprint "找到"
+        x1 = intX
+        y1 = intY
+    Else
+        //  Traceprint "没有找到"
+        Exit Function
+    End If
+       
+    Delay 1000
+        
+    If CmpColor(x, y, "F0EFF2", 0.9) = -1 Then 
+        //输出 "移动过"
+        是否移动 = 1
+    End If
+    If CmpColor(x1, y1, "F0EFF2", 0.9) = -1 Then 
+        //输出 "移动过"
+        是否移动 = 1
+    End If
+    If 是否移动 = 1 Then 
+        // 输出 "移动过"
+        是否自动寻路 = True
+    Else 
+        // 输出 "没移动"
+    End If
+End Function
+
+Sub 主程序
+   
+    
+    win_x = GetScreenX()
+    win_y = GetScreenY()
+    TracePrint "当前分辨率：" & win_x & "*" & win_y
+
+    读取配置
+    Do
+       
+        Rem 开始
+        If 多点比色(好友验证) = True Then 
+            输出 "取消好友验证"
+        
+        End If
+        If 多点比色(使用) = True Then 
+            输出 "使用"
+            Delay 1500
+            重置时间
+            Goto 开始
+        End If
+        赏金榜 
+        竞技场 
+        If 多点比色(我要变强) = True Then 
+            输出 "我要变强"
+            Delay 1000
+            重置时间
+            Goto 开始
+        End If
+        
+        If 接取任务() = True Then 
+       
+            Delay 1000
+            重置时间
+            Goto 开始
+        End If
+        If 多点比色(任务界面) = True Then 
+  
+            If 多点比色(采集) = True Then 
+                For 30
+                    Delay 500
+                    输出 "采集"
+                    If 多点比色(采集) <> True Then Exit For
+                Next
+                Delay 2000
+                重置时间
+                Goto 开始
+            End If
+           
+            If 多点比色(有队伍) = True Then 
+                输出 "在队伍中"
+                Delay 2000
+                // Goto 开始
+            End If
+           
+            If 多点比色(领取还魂秘术) = True Then 
+                输出 "领取还魂秘术"
+                Delay 1000
+                Goto 开始
+            End If
+            
+            FindMultiColor 320,231,583,351,"41C7FF-202020","13|10|ABEFFF,13|75|ACEFFF,5|76|76E0FF,4|91|51D3FF,10|79|9BEBFF",4,0.9,intX,intY
+            If intX > -1 And intY > -1 Then
+                Tap intX, intY
+                Delay 1000
+                输出 "决战九霄"
+                Goto 开始
+
+            ElseIf 多点比色(黑龙任务) = True Then 
+                输出 "黑龙任务"
+                Delay 5000
+                Goto 开始
+            
+            ElseIf 多点比色(队伍图标) = True Then 
+                Tap 580, 1070
+                Delay 1000
+            End If
+          /* For 15
+          		If 是否自动寻路() = True Then 
+          		 	输出 "自动寻路"
+          		Else 
+          			Exit For
+          		End If
+          	Next*/
+            If 主线是否完成 = 0 Then 
+                自动任务 = 0
+                主线任务 
+            ElseIf 赏月是否完成 = 0 Then
+                赏月任务
+            ElseIf 师门是否完成 = 0 Then
+                自动任务 = 0
+                师门任务 
+            ElseIf 支线是否完成 = 0 Then
+                自动任务 = 0
+                支线任务 
+            ElseIf 指引是否完成 = 0 Then
+                自动任务 = 0
+                指引任务 
+            ElseIf 羽翼是否完成 = 0 Then
+                自动任务 = 0
+                羽翼任务
+            ElseIf 帮派是否完成 = 0 Then
+                自动任务 = 0
+                帮派任务
+            ElseIf 诛仙奇缘是否完成 = 0 Then
+                自动任务 = 0
+                诛仙奇缘任务 
+            ElseIf 青云学堂是否完成 = 0 Then
+                自动任务 = 0
+                青云学堂任务
+            ElseIf 护送是否完成 = 0 Then
+                护送任务 
+            ElseIf 冬日温暖是否完成 = 0 Then
+                
+                冬日温暖任务 
+            ElseIf 宝图任务是否完成 = 0 Then
+       
+                宝图任务 
+            ElseIf 黑龙浩劫是否完成 = 0 Then
+                黑龙浩劫任务 
+            ElseIf 赏金猎人是否完成 = 0 Then
+                赏金猎人任务 
+            ElseIf 竞技场是否完成 = 0 Then
+                竞技场任务 
+            ElseIf 还魂秘术是否完成 = 0 Then
+                还魂秘术任务 
+            ElseIf 乱世妖魔是否完成 = 0 Then
+                乱世妖魔任务 
+            ElseIf 平定海波是否完成 = 0 Then
+            	输出 "平定海波任务"
+                平定海波任务 
+           
+            ElseIf 副本45是否完成 = 0 Then
+                接取副本任务 
+            ElseIf 精英副本45是否完成 = 0 Then
+                接取副本任务 
+            ElseIf 副本60是否完成 = 0 Then
+                接取副本任务
+            ElseIf 精英副本60是否完成 = 0 Then
+                接取副本任务 
+            ElseIf 副本75是否完成 = 0 Then
+                接取副本任务
+            ElseIf 精英副本75是否完成 = 0 Then
+                接取副本任务 
+            ElseIf 抓宠是否完成 = 0 Then
+                抓宠任务 
+            ElseIf 镇妖是否完成 = 0 Then
+                输出 "进行镇妖"
+                镇妖任务 
+            Else 
+                读取配置 
+                抓宠是否完成 = 1
+            End If
+          	
+        ElseIf 战斗()= True Then
+            重置时间
+            Goto 开始
+        ElseIf 通用() = True Then
+            重置时间 
+            // Delay 1000
+        Else 
+        	重启
+            If TickCount() - 其他检测时间 > 5000 Then
+                Tap win_x-1, win_y-1
+                输出 "其他界面"
+                重置时间
+            End If
+        End If
+        
+        Delay 500
+    Loop
+End Sub
+
+Dim 抓宠行动 = 0
+Function 捕捉怪物
+    If 多点比色(取消自动) = True Then 输出 "取消战斗"
+    
+    If 多点比色(捕捉) = True Then 
+    	
+        For 10
+            If 多点找色(怪物血条) = True Then 
+            
+                输出 intX & intY
+                For 10
+                    Delay 300
+                    If 多点比色(防御) = True Then 
+                        For 2
+                            FindStr(454,719,554,822,"捕捉失败","F3F3F2-303030",0.7,intX,intY)
+                            If intX > -1 And intY > -1 Then
+                                输出 "宠物已满"
+                                当前任务 = 0
+                                If 多点比色(自动战斗) = True Then
+                                    输出 "自动战斗"
+                                    输出 "改变宠物技能"
+                                    Delay 1000
+                                    Tap 60, 1130
+                                    Delay 1000
+                                    //防御
+                                    FindMultiColor 278,877,383,1011,"C3DFF5","-36|-4|41E6FF,-16|18|FFFDDE,-29|33|4FDEF9,-2|31|BCDCF6,-16|11|DEB075",0,0.9,intX,intY
+                                    If intX > -1 And intY > -1 Then
+                                   
+                                        Tap 330, 800
+                                    Else 
+                                        Tap 330, 940
+                            
+                                    End If
+
+                                    Exit Function
+                                End If
+                
+                            End If
+                            Delay 500
+                        Next
+                        Exit Function
+                    End If
+                Next
+           
+            Else 
+                输出 "找不到怪物血条"
+            End If
+            Delay 500
+        Next
+    End If
+    
+End Function
+Function 战斗
+    If 多点比色(战斗界面) = True Then 
+        战斗 = True
+        输出 "战斗界面"
+        抓宠行动 = 0
+        多点比色 (自动战斗1)
+        Delay 1000
+        For 300
+            If 当前任务 = 1 Then 
+                捕捉怪物 
+                输出 "捕捉"
+                //ElseIf 多点比色(自动战斗) = True Then
+                //  输出 "自动战斗"
+            End If
+            
+            If 多点比色(战斗界面) <> True Then 
+                If 当前任务 = 2 Then Tap 360,580
+                Exit For
+            	
+            End If
+            Delay 1000
+        Next
+    End If
+End Function
+Function 抓宠任务
+    
+    If 当前任务 = 0 Then 
+        Tap 670, 50
+        Delay 2000
+        Tap 470, 830
+        Delay 3000
+        Tap 680, 150
+        Delay 3000
+        Tap 220, 900
+       
+        If 等待多点比色(任务框) = True Then 
+            Tap 140, 930
+            Delay 1000
+            For 15
+                If CmpColorEx("157|659|3B536E,155|667|3C5570,155|662|C4DEEB,596|577|3A528C,152|652|213957,161|660|28415E",0.9) = 1 Then
+                    抓宠是否完成 = 1
+                    输出 "抓宠已完成"
+                    自动任务 = 0
+                    重置时间
+                    Exit Function
+                End If
+                //出售
+                If CmpColorEx("469|850|41C5FF,483|867|7CCAEB,482|875|345CA3,479|901|3365AB,475|869|4699CF,474|882|5FD1F5",0.9) = 1 Then
+                    Tap 480, 900
+                    Delay 1500
+                Else
+                    Exit For
+                End If
+                   
+            Next
+            Tap 600,1000
+           
+        End If
+       
+       
+    End If
+      
+    For 2
+        If CmpColorEx("582|522|FFEE99,575|519|FFB04A,578|566|FFEE95,567|570|FFCC5D,577|582|FFDE78,577|608|FFDE78",0.9) = 1 Then
+            输出 "正在自动巡逻"
+            Exit Function
+        Else 
+        End If
+        Delay 500
+        
+    Next  
+   
+    If 当前任务 = 1 Then Exit Function
+    输出 "抓宠任务"
+    If 多点比色(挂机图标) = True Then 
+        For 10
+            Delay 1000
+            If 多点比色(混沌时空) = True Then 
+                输出 "混沌时空"
+                For 10
+                    Delay 500
+                    If 抓宠等级 = 0 Then 
+                        Swipe 500, 300, 100, 300, 500
+                        Delay 1000
+                        If 多点找色(混沌一层) = True Then 
+                            Exit For
+                        End If
+                    ElseIf 抓宠等级 = 1 Then
+                        Swipe 500, 300, 100, 300, 500
+                        Delay 1000
+                        If 多点找色(混沌二层) = True Then 
+                            Exit For
+                        End If
+                    ElseIf 抓宠等级 = 2 Then
+                        Swipe 500, 300, 100, 300, 500
+                        Delay 1000
+                        If 多点找色(混沌三层) = True Then 
+                            Exit For
+                        End If
+                    ElseIf 抓宠等级 = 3 Then
+                        Swipe 500, 300, 100, 300, 500
+                        Delay 1000
+                        If 多点找色(混沌四层) = True Then 
+                            Exit For
+                        End If
+                    ElseIf 抓宠等级 = 4 Then
+                        Swipe 500, 300, 100, 300, 500
+                        Delay 1000
+                        If 多点找色(混沌五层) = True Then 
+                            Exit For
+                        End If
+                    ElseIf 抓宠等级 = 5 Then
+                        Swipe 100, 300, 500, 300, 500
+                        Delay 1000
+                        If 多点找色(混沌六层) = True Then 
+                            Exit For
+                        End If
+                    ElseIf 抓宠等级 = 6 Then
+                        Swipe 100, 300, 500, 300, 500
+                        Delay 1000
+                        If 多点找色(混沌七层) = True Then 
+                            Exit For
+                        End If
+                    ElseIf 抓宠等级 = 7 Then
+                        Swipe 100, 300, 500, 300, 500
+                        Delay 1000
+                        If 多点找色(混沌八层) = True Then 
+                            Exit For
+                        End If
+                    End If
+                Next
+                当前任务 = 1
+                //开始巡逻
+                If CmpColorEx("96|912|1C5796,96|931|1D5696,87|911|1D5C9B,75|912|19599C,76|928|175092,87|921|1E5C9B", 0.9) = 1 Then 
+                    输出 "开始巡逻"
+                    Tap 80, 950
+                    Delay 1000
+                Else 
+                    输出 "关闭挂机"
+                    Tap 620, 1100
+                    Delay 1000
+                End If
+               
+                Exit Function
+            End If
+        Next
+    End If
+End Function
+
+Function 赏月任务
+    Dim pos = 500,count = 0
+    退队
+    If 打开活动日程() <> True Then Exit Function
+    For 4
+        If 多点比色(活动日程) <> True Then Exit Function
+        If 多点找色(赏月图标) = True Then 
+            输出 "点击赏月图标"
+            任务检测时间 = TickCount()
+            任务延时 = 50000
+            Delay 2000
+            For 100
+               
+                FindStr(105,876,130,987,"邀请赏月","1064D8-505050",0.8,intX,intY)
+                If intX > -1 And intY > -1 Then
+                    Tap pos, 500
+                    Delay 500
+                    Tap intX, intY
+                    // Delay 1000
+                Else 
+                    赏月是否完成 = 1
+                    输出 "赏月已完成"
+                    Exit Function
+                End If
+                pos = pos - 75
+                If pos < 30 Then 
+                    count = count + 1
+                    pos = 500
+                    If count > 2 Then 
+                        count = 0
+                        Tap 200, 900
+                        Delay 1000
+                    Else
+                        Swipe 100, 500, 500, 500, 1000
+                        Delay 1000
+                    End If
+                End If
+                Delay 1000
+            Next
+            Exit Function
+        End If 
+        Swipe 300, 450, 530, 450, 500
+        Delay 1000
+    Next 
+    赏月是否完成 = 1
+    输出 "赏月已完成"
+    重置时间
+End Function
+Function 查找平定海波
+    If 多点比色(任务图标) <> True Then 
+        查找平定海波  = True
+        Exit Function
+    End If
+    
+    FindStr(219,1030,560,1083,"平定","1DD8F9-303030|1AAEC8-050505|18ABC0-050505|24B4C6-050505",0.7,intX,intY)
+    If intX > -1 And intY > -1 Then
+        查找平定海波 = True
+        
+        任务检测时间 = TickCount()
+        任务延时 = 10000
+        输出 "点击平定海波"
+        Tap intX, intY
+    End If
+    
+End Function
+Function 平定海波任务
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+    If 查找平定海波() = True Then Exit Function
+  
+    
+     If 打开活动日程() <> True Then Exit Function
+    If 多点比色(活动日程) <> True Then Exit Function
+    
+    Tap 350, 220
+    Delay 2000
+    If 多点找色(平定海波图标) = True Then 
+        输出 "点击平定海波图标"
+        任务检测时间 = TickCount()
+        任务延时 = 20000
+       
+        Exit Function
+    End If
+       
+    平定海波是否完成 = 1
+    输出 "平定海波任务已完成"
+    重置时间
+End Function
+
+
+Function 查找镇妖
+    If 多点比色(任务图标) <> True Then 
+        查找镇妖  = True
+        Exit Function
+    End If
+    
+    FindStr(219,1030,560,1083,"镇妖","1DD8F9-303030|1AAEC8-050505|18ABC0-050505",0.7,intX,intY)
+    If intX > -1 And intY > -1 Then
+        查找镇妖 = True
+        
+        任务检测时间 = TickCount()
+        任务延时 = 10000
+        输出 "点击镇妖"
+        Tap intX, intY
+    End If
+End Function
+
+
+
+
+Function 乱世妖魔任务
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+   
+    If 打开活动日程() <> True Then Exit Function
+    
+    For 4
+        If 多点比色(活动日程) <> True Then Exit Function
+        If 多点找色(乱世妖魔图标) = True Then 
+            输出 "点击乱世妖魔图标"
+            任务检测时间 = TickCount()
+            任务延时 = 20000
+            Exit Function
+        End If 
+        Swipe 300, 450, 530, 450, 500
+        Delay 1000
+    Next
+ 
+    乱世妖魔是否完成 = 1
+    输出 "乱世妖魔已完成"
+    重置时间
+End Function
+Function 还魂秘术任务
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+   
+    If 打开活动日程() <> True Then Exit Function
+    
+    For 4
+        If 多点比色(活动日程) <> True Then Exit Function
+        If 多点找色(还魂秘术图标) = True Then 
+            输出 "点击还魂秘术图标"
+            任务检测时间 = TickCount()
+            任务延时 = 20000
+            自动任务 = 1
+            Exit Function
+        End If 
+        Swipe 300, 450, 530, 450, 500
+        Delay 1000
+    Next 
+    还魂秘术是否完成 = 1
+    输出 "还魂秘术已完成"
+End Function
+Function 竞技场任务
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+   
+    If 打开活动日程() <> True Then Exit Function
+    
+    For 4
+        If 多点比色(活动日程) <> True Then Exit Function
+        If 多点找色(竞技场图标) = True Then 
+            输出 "点击竞技场图标"
+            任务检测时间 = TickCount()
+            任务延时 = 20000
+            自动任务 = 1
+            Exit Function
+        End If 
+        Swipe 300, 450, 530, 450, 500
+        Delay 800
+    Next 
+    竞技场是否完成 = 1
+    输出 "竞技场已完成"
+    重置时间
+End Function
+
+Sub 领取奖励
+    
+    Tap 640,1100
+End Sub
+
+Function 竞技场
+    FindPic 627,530,662,588,"Attachment:竞技场.png","000000",4,0.9,intX,intY
+    If intX > -1 And intY > -1 Then
+        FindPic 262,269,294,309,"Attachment:0次.png","000000",4,0.9,intX,intY
+        If intX > -1 And intY > -1 Then 
+            Tap 380, 780
+            Delay 1000
+            Tap 380, 960
+            Delay 2000
+            Tap 380, 500
+            Delay 2000
+            输出 "竞技场已完成"
+            竞技场是否完成 = 1
+            重置时间
+        Else
+            Tap 100,1000
+            输出 "挑战"
+            Delay 2000
+        End If
+        FindPic 627,530,662,588,"Attachment:竞技场.png","000000",4,0.9,intX,intY
+        If intX > -1 And intY > -1 Then
+            Tap 620, 1080
+        End If
+    End If
+   
+End Function
+
+Function 添加还魂秘术
+    FindPic 577,566,610,639,"Attachment:还魂.png","000000",4,0.9,intX,intY
+    If intX = -1 Or intY = -1 Then
+        Exit Function
+    End If
+    
+    FindPic 133,242,579,1083,"Attachment:摆摊.png","000000",4,0.8,intX,intY
+    If intX > -1 And intY > -1 Then
+        Tap intX, intY
+        Delay 500
+        输出 "摆摊"
+        添加还魂秘术 = True
+        Exit Function
+    End If
+    FindPic 167,436,549,1058,"Attachment:获取途径.png","000000",4,0.8,intX,intY
+    If intX > -1 And intY > -1 Then
+        Tap intX, intY
+        Delay 500
+        输出 "获取途径"
+        添加还魂秘术 = True
+        Exit Function
+    End If
+    FindPic 167,436,549,1058,"Attachment:添加.png","000000",4,0.9,intX,intY
+    If intX > -1 And intY > -1 Then 
+        Tap 350, 950
+        Delay 500
+        输出 "添加"
+        添加还魂秘术 = True
+        Exit Function
+    End If
+    FindPic 167,436,549,1058,"Attachment:获取.png","000000",4,0.9,intX,intY
+    If intX > -1 And intY > -1 Then 
+        Tap 350, 950
+        Delay 500
+        输出 "获取"
+        添加还魂秘术 = True
+        Exit Function
+    End If
+    FindPic 377,842,414,897,"Attachment:完成.png","000000",4,0.9,intX,intY
+    If intX > -1 And intY > -1 Then
+        还魂秘术是否完成 = 1
+        输出 "还魂秘书已完成"
+        重置时间
+        Tap 150, 950
+        Delay 2000
+      
+    End If
+    FindPic 577,566,610,639,"Attachment:还魂.png","000000",4,0.9,intX,intY
+    If intX > -1 And intY > -1 Then
+        Tap 610, 1100
+    End If
+End Function
+Function 赏金榜
+	
+    Dim i = 520
+    FindPic 610,589,651,698,"Attachment:赏金榜.png","000000",4,0.9,intX,intY
+    If intX > -1 And intY > -1 Then 
+        FindPic 81,673,120,736,"Attachment:免费刷新.png","000000",4,0.9,intX,intY
+        If intX > -1 And intY > -1 Then
+            Tap intX, intY
+            输出 "免费刷新"
+            Delay 2000
+        End If
+        For 4
+            Tap i, 400
+            Delay 1000
+            FindPic 81,889,114,952,"Attachment:接取.png","000000",4,0.9,intX,intY
+            If intX > -1 And intY > -1 Then
+                Tap intX, intY
+                输出 "接取赏金榜"
+                Delay 2000
+                Exit For
+            End If
+            i = i - 90
+        Next
+        Delay 1000
+        FindPic 610,589,651,698,"Attachment:赏金榜.png","000000",4,0.9,intX,intY
+        If intX > -1 And intY > -1 Then 
+        	
+            Tap 540, 1070
+        End If
+    End If
+End Function
+
+Function 赏金猎人任务
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+    For 3
+        FindMultiColor 227,1082,549,1108,"1EB8D1","4|-7|1BDCFF,3|0|1BDBFE,2|-2|1BDCFF,5|-3|1BDCFF,-1|-2|1BDBFD,1|-5|1BDCFF",4,0.9,intX,intY
+        If intX > -1 And intY > -1 Then 
+            If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+            Tap intX, intY
+            输出 "点击赏金猎人任务"
+            任务检测时间 = TickCount()
+            任务延时 = 20000
+            Exit Function
+        End If
+        Delay 800
+    Next
+    If 打开活动日程() <> True Then Exit Function
+    
+    For 4
+        If 多点比色(活动日程) <> True Then Exit Function
+        If 多点找色(赏金猎人图标) = True Then 
+            输出 "点击赏金猎人图标"
+            任务检测时间 = TickCount()
+            任务延时 = 20000
+            自动任务 = 1
+            Exit Function
+        End If 
+        Swipe 300, 450, 530, 450, 500
+        Delay 800
+    Next 
+    赏金猎人是否完成 = 1
+    输出 "赏金猎人已完成"
+    重置时间
+End Function
+
+Function 宝图任务
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+    For 3
+        FindStr(219,1030,560,1083,"宝","1DD8F9-303030|1AAEC8-050505|18ABC0-050505",0.7,intX,intY)
+        If intX > -1 And intY > -1 Then 
+            If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+            Tap intX, intY
+            输出 "点击宝图任务"
+            任务检测时间 = TickCount()
+            任务延时 = 10000
+            Exit Function
+        End If
+        Delay 800
+    Next
+    
+    If 打开活动日程() <> True Then Exit Function
+    
+    For 4
+        If 多点比色(活动日程) <> True Then Exit Function
+        If 多点找色(宝图图标) = True Then 
+            输出 "点击宝图图标"
+            任务检测时间 = TickCount()
+            任务延时 = 20000
+            自动任务 = 1
+            Exit Function
+        End If 
+        Swipe 300, 450, 530, 450, 500
+        Delay 1000
+    Next 
+    宝图任务是否完成 = 1
+    输出 "宝图任务已完成"
+    重置时间
+End Function
+
+Function 查找冬日温暖
+    If 多点比色(任务图标) <> True Then 
+        查找冬日温暖  = True
+        Exit Function
+    End If
+   
+    FindStr 219, 1031, 561, 1058, "冬", "1BDCFF-303030", 0.6, intX, intY
+    If intX > -1 And intY > -1 Then
+        查找冬日温暖 = True
+        
+        任务检测时间 = TickCount()
+        任务延时 = 10000
+        输出 "点击冬日温暖"
+        Tap intX, intY
+    End If
+   
+End Function
+
+Function 打开活动日程
+    If 多点比色(活动日程) = True Then 
+        Tap 640, 1080
+        Delay 1000
+    End If
+    If 多点比色(活动图标) = True Then 
+        Tap 660, 440
+        For 20
+            Delay 500
+            If 多点比色(活动日程) = True Then 
+                打开活动日程 = True
+                Tap 540,220
+                Delay 1000
+                Exit Function
+            End If
+        Next
+    End If
+End Function
+
+Function 冬日温暖任务
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+    
+    If 查找冬日温暖() = True Then Exit Function
+    For 3
+        下滑
+        If 查找冬日温暖() = True Then Exit Function
+        
+    Next
+    For 3
+        上滑
+        If 查找冬日温暖() = True Then Exit Function
+    
+    Next
+   
+    
+    If 打开活动日程() <> True Then Exit Function
+    
+    For 3
+        If 多点比色(活动日程) <> True Then Exit Function
+        If 多点找色(冬日温暖图标) = True Then 
+            输出 "点击冬日温暖图标"
+            任务检测时间 = TickCount()
+            任务延时 = 20000
+            自动任务 = 1
+            Exit Function
+        End If
+        Delay 1000
+    Next 
+    冬日温暖是否完成 = 1
+    输出 "冬日温暖已完成"
+    重置时间
+End Function
+
+Function 进行副本任务
+    If 多点比色(副本界面) <> True Then Exit Function
+    If 副本45是否完成 = 0 Then 
+        Tap 530, 1120
+        Delay 1000
+        If 多点找色(通关45) = True Then 
+            副本45是否完成 = 1
+            输出 "45级副本已通关"
+            重置时间
+        Else
+            Tap 450, 280
+            Delay 1000
+            Tap 110, 1000
+            Delay 3000
+            Exit Function
+        End If
+    ElseIf 副本60是否完成 = 0 Then
+        Tap 530, 1120
+        Delay 1000
+        If 多点找色(通关60) = True Then 
+            副本60是否完成 = 1
+            输出 "60级副本已通关"
+            重置时间
+        Else
+            Tap 450, 550
+            Delay 1000
+            Tap 110, 1000
+            Delay 3000
+            Exit Function
+        End If
+    ElseIf 精英副本45是否完成 = 0 Then
+        Tap 400, 1120
+        Delay 1000
+        If 多点找色(通关精英45) = True Then 
+            精英副本45是否完成 = 1
+            输出 "45级精英副本已通关"
+            重置时间
+        Else
+            Tap 450, 280
+            Delay 1000
+            Tap 110, 1000
+            Delay 3000
+            Exit Function
+        End If
+        
+    ElseIf 精英副本60是否完成 = 0 Then
+        Tap 400, 1120
+        Delay 1000
+        If 多点找色(通关精英60) = True Then 
+            精英副本60是否完成 = 1
+            输出 "60级精英副本已通关"
+            重置时间
+        Else
+            Tap 450, 550
+            Delay 1000
+            Tap 110, 1000
+            Delay 3000
+            Exit Function
+        End If
+    End If
+    If 多点比色(副本界面) = True Then Tap 650, 1100
+End Function
+Function 接取副本任务
+    If 多点比色(副本任务) = True Then 
+        输出 "副本任务"
+        Delay 1000
+        Exit Function
+    End If
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+    If 多点比色(任务界面) = True Then 
+      
+        Tap 670, 50
+        For 5
+            Delay 1000
+            If 多点比色(当前地图) = True Then 
+                Tap 480, 820
+                Exit For
+            End If
+        Next
+        For 5
+            Delay 1000
+            If 多点比色(任务界面) = True Then 
+                Tap 680, 150
+                Delay 2000
+                Exit For
+            End If
+        Next
+        For 5
+            Delay 1000
+            If 多点比色(寻路地图) = True Then 
+                Tap 230, 680
+                For 10
+                    Delay 1000
+                    If 多点比色(任务框) = True Then 
+                        Tap 200,900
+                        输出 "副本任务"
+                        Delay 2000
+                        任务检测时间 = TickCount()
+                        任务延时 = 30000
+                        进行副本任务 
+                        Exit Function
+                    End If
+                Next
+                Exit For
+            End If
+        Next
+		
+    End If
+End Function
+
+Function 退队
+  
+    If 多点比色(任务界面) = True Then 
+        If 多点比色(队伍图标) = True Then 
+            If CmpColorEx("513|1032|83AFCE,547|1059|DEF5FE,512|1095|7FACCC,485|1052|BEDCE9",0.9) = 1 Then
+                //是否在队伍中
+            Else
+                Exit Function
+            End If
+        End If
+        Tap 600, 1200
+        Delay 2000
+        If 找字(队伍对话框) <> True Then 
+            Tap 600, 1200
+            If 等待找字(队伍对话框) = True Then 
+                If 等待找字(退出队伍) = True Then
+                    Tap intX,intY
+                    If 等待多点比色(通用确定) = True Then 
+                        Tap 300, 750
+                        Delay 1500
+                    End If
+                    
+                End If
+            End If
+        End If
+        
+        
+        Tap 650, 1080
+        Delay 1000
+    End If
+End Function
+
+Function 队员是否满
+    If 找字(队伍对话框) = True Then 
+        //队长
+        If CmpColorEx("504|215|7B8CDA,494|226|8E9FE4,491|220|BEC6F7,471|214|DCE3F0,500|236|B3C4FD,492|210|D8E0F1",0.9) = 1 Then
+            FindMultiColor 442,847,531,1014,"699CCE","-8|8|A1C5E7,-18|15|7D9EBF,-23|6|EDFCFC,4|5|A1C6E4,4|13|A1C3E2",0,0.9,intX,intY
+            If intX > -1 And intY > -1 Then 
+            Else 
+                队员是否满 = True
+            End If
+        End If
+    End If
+End Function
+
+Function 接取任务
+   
+    If 多点比色(任务框) = True Then 
+        接取任务 = True
+        If 当前任务 = 3 Then
+            镇妖计数 = 镇妖计数 + 1
+            If 镇妖计数 >= 镇妖数量 Then 
+                镇妖是否完成 = 1
+                自动任务 = 0
+                重置时间 
+                Tap win_x - 1, win_y - 1
+                输出 "镇妖完成"
+                Exit Function
+            End If
+        End If
+        //特殊护送
+        If 多点比色(特殊护送) <> True Then
+            Tap 200,900
+            输出 "任务框"
+        Else 
+            输出 "特殊护送"
+            护送是否完成 = 1
+            自动任务 = 0
+            重置时间
+        End If
+    End If
+End Function
+
+Function 匹配镇妖活动
+    Dim x,y
+    If 找字(匹配目标) = True Then 
+        
+        For 4
+            Swipe 300, 300, 0, 300, 100
+            Delay 1500
+            If 找字(匹配目标) <> True Then Exit Function
+            FindPic 399,282,568,421,"Attachment:每日必做.png","000000",0,0.8,intX,intY
+            If intX > -1 And intY > -1 Then 
+                输出 "找到每日必做"
+                x = intX
+                y = intY
+                Rem 点击镇妖活动
+                FindPic 399,282,568,421,"Attachment:镇妖活动1.png","000000",0,0.8,intX,intY
+                If intX > -1 And intY > -1 Then 
+                    Tap 80, 900
+                    输出 "自动匹配镇妖2"
+                    Exit Function
+                End If
+                FindPic 399,282,568,421,"Attachment:镇妖活动.png","000000",0,0.8,intX,intY
+                If intX > -1 And intY > -1 Then 
+                    Tap intX, intY
+                    Delay 1000
+                    Tap 80, 900
+                    输出 "自动匹配镇妖1"
+                    Exit Function
+                End If
+                
+                Tap x, y
+                Delay 1000
+                Goto 点击镇妖活动
+            End If
+        Next
+    End If
+
+End Function
+
+Function 等待队伍成员
+    Dim 计数,喊话计时,队伍计时
+    计数 = 0
+    喊话计时 = 30
+    队伍计时 = 0
+   
+    Do
+        Delay 1000
+        If 找字(队伍对话框) <> True Then 
+            队伍计时 = 队伍计时 + 1
+            If 队伍计时 > 4 Then
+                当前任务 = 0
+                重置时间 
+                输出 "等待队伍成员出错"
+                Exit Function
+            End If
+        Else 
+            队伍计时 = 0
+        End If
+                          
+        //队长
+        If CmpColorEx("504|215|7B8CDA,494|226|8E9FE4,491|220|BEC6F7,471|214|DCE3F0,500|236|B3C4FD,492|210|D8E0F1",0.9) = 1 Then
+            FindMultiColor 442,847,531,1014,"699CCE","-8|8|A1C5E7,-18|15|7D9EBF,-23|6|EDFCFC,4|5|A1C6E4,4|13|A1C3E2",0,0.9,intX,intY
+            If intX > -1 And intY > -1 Then
+                喊话计时 = 喊话计时 + 1
+                //一键喊话
+                If 喊话计时>=30 Then
+                    Tap 560, 930
+                    喊话计时 = 0
+                End If
+            Else 
+                计数 = 计数 + 1
+                输出 "计数" & 计数
+                If 计数 > 4 Then
+                    输出 "队伍已满"
+                    自动任务 = 0
+                    任务检测时间 = 0
+                    任务延时 = 0
+                    Tap 650, 1080
+                    Delay 1000
+                    Exit Function
+                End If
+            End If
+        Else 
+            计数 = 0
+            FindMultiColor 136,464,627,1055,"5B85B4","-11|-1|A2C2DD,-19|20|B1D1E7,-14|9|6690BC,-10|36|5984B3,-16|46|6690BC",0,0.9,intX,intY
+            If intX > -1 And intY > -1 Then
+                                    
+                Tap intX, intY
+                输出 "点击同意"
+                Delay 1000
+            End If
+        End If
+                              
+                          
+
+                            
+        输出 "等待队伍成员"
+    Loop
+    
+End Function
+Function 带队
+    If 多点比色(有队伍) = True Then 退队 
+    If 多点比色(任务界面) = True Then 
+       
+        Tap 600, 1200
+        Delay 2000
+        If 多点比色(队伍图标) = True Then 
+            If CmpColorEx("513|1032|83AFCE,547|1059|DEF5FE,512|1095|7FACCC,485|1052|BEDCE9",0.9) = 1 Then
+                输出 "已经有队伍"
+                Tap 600, 1200
+            Else
+               
+            End If
+        End If
+        If 等待找字(队伍对话框) = True Then 
+            If 找字(创建队伍) = True Then 
+                Tap 80, 1000
+                Delay 1500
+            End If
+            If 队员是否满() = True Then 
+                输出 "队伍已满"
+                自动任务 = 0
+                任务检测时间 = 0
+                任务延时 = 0
+                Tap 650, 1080
+                Exit Function
+            Else 
+                Tap 600, 830
+                If 等待找字(匹配目标) = True Then 
+                    输出 "匹配镇妖活动"
+                    匹配镇妖活动 
+                    等待队伍成员
+                End If
+            End If
+            
+        End If
+        
+       
+        
+        Delay 100000
+    End If
+
+End Function
+    
+Function 镇妖任务
+    //  TracePrint TickCount()
+    //  TracePrint 任务检测时间
+    //  TracePrint 任务延时
+    
+    If 是否带队 = 1 And 当前任务 < 3 Then 
+        输出 "带队"
+        带队 
+        镇妖计数 = 0
+        当前任务 = 3
+    End If
+    If TickCount() - 任务检测时间 < 任务延时 Then Exit Function
+    
+   /* If 查找镇妖() = True Then Exit Function
+    For 3
+        下滑
+        If 查找镇妖() = True Then Exit Function
+        
+    Next
+    For 3
+        上滑
+        If 查找镇妖() = True Then Exit Function
+        
+    Next*/
+    If 打开活动日程() <> True Then Exit Function
+    
+    
+    For 4
+        If 多点比色(活动日程) <> True Then Exit Function
+    
+        If 多点找色(镇妖图标) = True Then 
+            输出 "点击镇妖图标"
+            任务检测时间 = TickCount()
+            任务延时 = 20000
+            自动任务 = 1
+            Exit Function
+        End If
+        Swipe 300, 450, 530, 450, 500
+        Delay 1000
+    Next 
+    镇妖是否完成 = 1
+    输出 "镇妖任务已完成"
+    重置时间
+End Function
+Function 回收金仓药
+	FindMultiColor 111,647,556,1082,"EEE7D6","-11|5|A7B2A1,10|-4|1C2AF9,-10|-11|FFFFEE,-3|6|B1B194,-19|-7|C8D0BE,-20|8|205FD8,-7|-2|EEEEE4",0,0.9,intX,intY
+If intX > -1 And intY > -1 Then
+	Tap intX, intY
+	Delay 500
+End If
+FindMultiColor 237,257,350,436,"44ACDC","-4|4|185091,-2|20|2365A2,11|34|A3EEFF,-12|45|195596,-11|72|2E89C5,-6|83|56D5FF,-10|98|2E99D9",0,0.9,intX,intY
+If intX > -1 And intY > -1 Then
+	Tap intX,intY
+End If
+
+End Function
+SetRowsNumber(0)
+//注意：每次制作完字库后，需要自行把制作的字库文件添加到脚本“附件”中
+SetDictEx(0, "Attachment:字库.txt")
+UseDict(0)
+//以上两句脚本只需要调用一次
+//test
+主程序 
+
+Sub test
+    Dim x,y,x1,y1,是否移动 = 0
+    //退出队伍
+    Do
+       
+        任务检测时间 = TickCount()
+        回收金仓药
+        输出 TickCount()-任务检测时间
+        Delay 500
+    Loop
+End Sub
