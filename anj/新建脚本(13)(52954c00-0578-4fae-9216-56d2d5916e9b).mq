@@ -11,3 +11,15 @@ If   intX > -1 And intY > -1 Then
    
 	  	
 End If
+
+Dim point=·À·â×ø±ê(100,334,20,100)
+TracePrint "point",point(0),point(1)
+Dim s=Int("dsadf")
+
+if s<>null then TracePrint s
+
+Function  ·À·â×ø±ê(x,y,ÒÆ¶¯x,ÒÆ¶¯y)
+Dim  xx=x+Int(Rnd()*ÒÆ¶¯x)
+Dim  yy=y+Int(Rnd()*ÒÆ¶¯y)
+·À·â×ø±ê=Array(xx,yy)
+End Function
