@@ -1,0 +1,10 @@
+Dim i=0
+Do 
+   TracePrint "ok"
+   i=10
+Loop While i <> 0
+//条件放后面，前面的循环内容可以执行一次！
+返回值 = SendSimpleEmail(服务器,发件人邮箱,密码,主题,内容,收件地址)
+Sys.ClearMemory()
+Import "CmdLibDemo.mql"
+Import "CmdLibDemo.mql"
