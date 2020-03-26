@@ -1,2 +1,3 @@
 module designPattern {
+	requires cglib;
 }
