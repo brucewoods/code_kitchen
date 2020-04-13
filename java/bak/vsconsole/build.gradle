@@ -1,0 +1,4 @@
+apply plugin:'java'
+dependencies {
+  compile 'com.rabbitmq:amqp-client:5.8.0'
+}

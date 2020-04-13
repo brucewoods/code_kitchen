@@ -1,0 +1,28 @@
+<resources>
+
+    <string name="app_name">1stapp</string>
+    <string name="MY_DATA">my_data</string>
+    <string name="button1">左</string>
+    <string name="button2">右</string>
+    <string name="textview">Display</string>
+    <string name="switch1">开关</string>
+    <string name="button3">确定</string>
+    <string name="editText">请输入数值</string>
+    <string name="radiobutton1">Android</string>
+    <string name="radiobutton2">Apple</string>
+    <string name="imageView1">image</string>
+    <string name="checkbox1">语文</string>
+    <string name="checkbox2">数学</string>
+    <string name="checkbox33">英语</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Localstorage">Localstorage</string>
+    <string name="Datakey">Datakey</string>
+    <string name="button_plus">+</string>
+    <string name="button_minus">-</string>
+    <string name="data_key">DATA_KEY</string>
+    <string name="shp_name">SHP_NAME</string>
+</resources>

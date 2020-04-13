@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: bruce
+Build-Jdk: 13.0.2
+Implementation-Title: wannaapp
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: wannaapp
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/wannaapp
+Created-By: Maven Integration for Eclipse
+

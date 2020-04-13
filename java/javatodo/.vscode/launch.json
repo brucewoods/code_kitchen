@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "HelloWorld",
+            "classPaths": ["F:\\downloads\\idm\\amqp-client-5.8.0.jar"]
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-HelloWorld<java_d5cd1e17>",
+            "request": "launch",
+            "mainClass": "HelloWorld",
+            "projectName": "java_d5cd1e17"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-VariableTest<java_d5cd1e17>",
+            "request": "launch",
+            "mainClass": "VariableTest",
+            "projectName": "java_d5cd1e17"
+        }
+    ]
+}

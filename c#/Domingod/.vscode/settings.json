@@ -1,3 +1,10 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "dotnet-test-explorer.testProjectPath": "F:\\workspace\\workstation\\git\\code_kitchen\\c#\\Domingod"
 }

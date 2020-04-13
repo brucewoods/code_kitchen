@@ -1,0 +1,9 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "f:\\downloads\\idm\\amqp-client-5.8.0.jar",
+        "slf4j-api-1.7.9.jar",
+        "slf4j-nop-1.7.18.jar",
+        "junit-platform-console-standalone-1.6.1.jar"
+    ]
+}

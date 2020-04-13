@@ -18,3 +18,6 @@ F:\workspace\workstation\git\code_kitchen\c#\Domingod\obj\Debug\netcoreapp2.0\Do
 F:\workspace\workstation\git\code_kitchen\c#\Domingod\obj\Debug\netcoreapp2.0\Domingod.AssemblyInfo.cs
 F:\workspace\workstation\git\code_kitchen\c#\Domingod\obj\Debug\netcoreapp2.0\Domingod.dll
 F:\workspace\workstation\git\code_kitchen\c#\Domingod\obj\Debug\netcoreapp2.0\Domingod.pdb
+f:\workspace\workstation\git\code_kitchen\c#\Domingod\bin\Debug\netcoreapp2.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+f:\workspace\workstation\git\code_kitchen\c#\Domingod\bin\Debug\netcoreapp2.0\xunit.runner.reporters.netcoreapp10.dll
+f:\workspace\workstation\git\code_kitchen\c#\Domingod\bin\Debug\netcoreapp2.0\xunit.runner.utility.netcoreapp10.dll

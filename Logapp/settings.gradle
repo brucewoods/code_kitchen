@@ -1,0 +1,2 @@
+rootProject.name='Logapp'
+include ':app'

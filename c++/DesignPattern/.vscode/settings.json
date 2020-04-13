@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "*.thor": "ruby",
+        "*.jsx": "javascript",
+        "*.tpl": "html",
+        "xutility": "cpp"
+    },
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    }
+}

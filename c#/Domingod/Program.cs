@@ -1,20 +1,27 @@
 ﻿using System;
 using System.Threading;
+
 namespace Domingod
 {
+
+     
     class Program
     {
-        static void Main(string[] args)
-        {
-            // Resizer.WriteSomething();
+           
+        public void Testvoid(){
 
-            // NewYorCitySearch();
-           // PrintWords();
-           ReTesting.abc();
-           var date=DateTime.Now;
-           var lastmonth=date.AddDays(-date.Day).ToString("yyyy-MM-dd");
-           Console.WriteLine(lastmonth);
         }
+        // static void Main(string[] args)
+        // {
+        //     // Resizer.WriteSomething();
+
+        //     // NewYorCitySearch();
+        //    // PrintWords();
+        //    ReTesting.abc();
+        //    var date=DateTime.Now;
+        //    var lastmonth=date.AddDays(-date.Day).ToString("yyyy-MM-dd");
+        //    Console.WriteLine(lastmonth);
+        // }
           
 
          
