@@ -1,0 +1,5 @@
+wannaapp\controller\AppController.class
+wannaapp\repository\UserRepository.class
+wannaapp\model\User.class
+wannaapp\AppMain.class
+wannaapp\service\UserService.class
