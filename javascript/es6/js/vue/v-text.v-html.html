@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./node_modules/vue/dist/vue.min.js"></script>
+    <div id="app">
+        {{msg}}
+
+        <span v-html="msg"></span>
+        <span v-text="msg"></span>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                msg: "<h1>hello are you ok </h1>"
+            }
+        })
+    </script>
+</body>
+
+</html>

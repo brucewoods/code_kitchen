@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="person">
+        <input type="text" v-model="num">
+        <button v-on:click="num++">vote</button>
+        <button v-on:click="cancle()">cancle</button>
+        <h1>handsome boy:{{name}},{{num}} people vote for him</h1>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: "#person",
+            data: {
+                name: "tom",
+                num: 2
+            },
+            methods: {
+                cancle() {
+                    this.num--
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

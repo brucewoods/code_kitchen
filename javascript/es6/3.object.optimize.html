@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const person = {
+            name: "jack",
+            age: 23,
+            skills: ["eat", "do", "kill"]
+        }
+
+        console.log("keys::" + Object.keys(person))
+        console.log("values::" + Object.values(person))
+        console.log("key-value::" + Object.entries(person))
+
+        //
+        const d1 = {
+            a: 1
+        }
+        const d2 = {
+            b: 2
+        }
+        const d3 = {
+            c: 3
+        }
+
+        Object.assign(d1, d2, d3)
+        console.log(d1)
+
+
+        const age = 23
+        const name = "jack"
+        const newperson = {
+            age: age,
+            name: name
+        }
+        const optimized = {
+            age,
+            name
+        }
+        console.log(newperson)
+        console.log(optimized)
+
+        let person3 = {
+            name: "tom",
+            eat: function(food) {
+                console.log(this.name + " is eating " + food)
+            },
+            eat2: food => console.log(person3.name + " is eating " + food),
+            eat3(f) {
+                console.log(this.name + " eating " + f)
+            }
+        }
+        person3.eat("apple")
+        person3.eat2("banana")
+        person3.eat3("orange")
+
+        //copy object
+        let o1 = {
+            name: "anny",
+            age: 15
+        }
+        let copy = {...o1
+        }
+        console.log("copy object::" + copy)
+
+        // merge object
+        let age1 = {
+            age: 15
+        }
+        let name1 = {
+                name: "tom"
+            }
+            //{age:15,name:"tome"}
+        let merge = {...age1,
+            ...name1
+        }
+        console.log("merge object::" + merge)
+    </script>
+
+</body>
+
+</html>

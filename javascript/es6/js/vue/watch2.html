@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="demo">{{ fullName }}
+        <input type="number" v-model="number">
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#demo',
+            data: {
+                firstName: 'Foo',
+                lastName: 'Bar',
+                fullName: 'Foo Bar',
+                number: '1'
+            },
+            watch: {
+                firstName: function(val) {
+                    this.fullName = val + ' ' + this.lastName
+                },
+                lastName: function(val) {
+                    this.fullName = this.firstName + ' ' + val
+                },
+                number(n, o) {
+                    console.info(n)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

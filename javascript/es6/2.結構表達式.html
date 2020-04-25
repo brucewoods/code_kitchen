@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        var arr = [1, 5, 6]
+        let [a, b, c] = arr;
+        console.log(a, b, c)
+
+        //對象解構
+
+        const person = {
+            name: "jack",
+            age: 23,
+            skills: ["eat", "do", "kill"]
+        }
+        let {
+            name: n,
+            age,
+            skills
+        } = person;
+        console.log(n, age, skills)
+
+        // string extends
+
+        let str = "im the boss.v2"
+        console.log(str.startsWith("im"))
+        console.log(str.endsWith(".v2"))
+        console.log(str.includes("boss"))
+
+        function demo() {
+            return "gogogo"
+        }
+        let str2 = `im ${n}  age${age+30}
+        333   ${demo()}
+      3332342`
+        console.log(str2);
+
+
+        function add(b) {
+
+            var s = b || 1
+            return s + 1;
+        }
+        console.log("tra::" + add())
+
+        function add2(b = 1) {
+            return b + 1;
+        }
+        console.log("new::" + add2())
+
+        // 任意
+        function add3(...values) {
+            console.log(values.length)
+            console.log(values)
+            return "test"
+        }
+        console.log("add unlimited params::" + add3(1, 3, 4, 5))
+
+        //箭頭函數
+        var print = obj => console.info(obj)
+
+        print("you are a func")
+
+        var print2 = para => console.log(para.name);
+        var print3 = ({
+            name
+        }) => console.log(name);
+        print2(person)
+        print3(person)
+    </script>
+</body>
+
+</html>

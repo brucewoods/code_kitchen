@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <div id="app">
+        Apple Price: {{applePrice}} <input type="number" v-model="appleCount"> <br> Banana Price:{{bananaPrice}}<input type="number" v-model="bananaCount">
+        <BR> Total pRICE:{{totalPrice}} <br> {{msg}} <br>
+        <span v-for="(item, index) in content" :key="index">
+            {{item.comment|censored}}
+        </span>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                applePrice: 2.00,
+                bananaPrice: 1.00,
+                appleCount: 10,
+                bananaCount: 20,
+                msg: "3",
+                content: [{
+                    comment: "fuck off"
+                }, {
+                    comment: "dick head"
+                }]
+            },
+            computed: {
+                totalPrice() {
+                    return this.applePrice * this.appleCount + this.bananaCount * this.bananaPrice
+                }
+            },
+            watch: {
+                bananaCount: function(n, o) {
+                    if (this.bananaCount >= 20) {
+                        this.msg = "banana account exceed stock count"
+                        this.bananaCount = 20
+                    } else
+                        this.msg = ""
+                }
+            },
+            filters: {
+                censored(content) {
+                    if (content.contains("fuck")) {
+                        return "bye bye"
+                    } else {
+                        return content;
+                    }
+                }
+            }
+        })
+        Vue.filters("golobalFileters", function(v) {
+            //todo some logics
+        })
+    </script>
+</body>
+
+</html>

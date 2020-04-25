@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // $.ajax({
+        //     url: "mock/person.json",
+        //     success: function(r) {
+
+        //         $.get(`mock/course_${r.id}.json`, function(r2) {
+        //             console.info(r2)
+        //         })
+        //     }
+
+        // })
+
+        function get(url, data) {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: url,
+                    data: data,
+                    success(data) {
+                        resolve(data)
+                    },
+                    error(err) {
+                        reject(err)
+                    }
+                })
+            })
+        }
+
+        get('mock/person.json').then((data) => {
+            console.info("查詢用戶陳宮")
+            return get('mock/course_' + data.id + '.json')
+        }).then((data) => console.info(data.score))
+    </script>
+</body>
+
+</html>

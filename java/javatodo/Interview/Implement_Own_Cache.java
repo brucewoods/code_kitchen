@@ -16,7 +16,7 @@ public class Implement_Own_Cache {
 
     @Test
     public void testCache() throws InterruptedException, ExecutionException {
-    String  key="id";
+    final String  key="id";
     //不设置过期
     System.out.println("=============不设置过期=============");
     Cache.put(key, "234");
@@ -32,11 +32,11 @@ public class Implement_Own_Cache {
 
     //并发测试
 
-    ExecutorService  service=Executors.newFixedThreadPool(10);
-    Future[] futures=new Future[10];
+    final ExecutorService  service=Executors.newFixedThreadPool(10);
+    final Future[] futures=new Future[10];
     /***添加** */
     { 
-        long start=System.currentTimeMillis();
+        final long start=System.currentTimeMillis();
         for(int j=0;j<10;j++){
             futures[j]=service.submit(()->{
                 for(int i=0;i<100000;i++){
@@ -45,7 +45,7 @@ public class Implement_Own_Cache {
             });
         }
 
-       for (Future f: futures) 
+       for (final Future f: futures) 
            f.get();
        System.out.printf("put cost time %dms \n",System.currentTimeMillis()-start);    
            
@@ -56,7 +56,7 @@ public class Implement_Own_Cache {
     /*******查询 */
 
     {
-        long start=System.currentTimeMillis();
+        final long start=System.currentTimeMillis();
         for(int j=0;j<10;j++){
           futures[j]=service.submit(()->{
                 for(int i=0;i<100000;i++){
@@ -64,7 +64,7 @@ public class Implement_Own_Cache {
                 }
 
           }); }
-        for (Future future : futures) {
+        for (final Future future : futures) {
             future.get();
             
         }
@@ -89,15 +89,15 @@ class Cache{
    //定时器线程池,用于清除过期缓存
     private final static ScheduledExecutorService executor=Executors.newSingleThreadScheduledExecutor();
 
-    public synchronized static void put(String key,Object value){
+    public synchronized static void put(final String key,final Object value){
         put(key, value,0);
     }
-    public synchronized static void put(String key,Object value,long expire){
+    public synchronized static void put(final String key,final Object value,final long expire){
        
          Cache.remove(key);
 
          if(expire>0){
-           Future future=executor.schedule(new Runnable(){
+           final Future future=executor.schedule(new Runnable(){
            
                @Override
                public void run() {
@@ -120,18 +120,18 @@ class Cache{
    
    
 
-    public synchronized static  Object get(String key){
-        Entity entity=map.get(key);
+    public synchronized static  Object get(final String key){
+        final Entity entity=map.get(key);
         return entity==null?null:entity.getValue();
     }
 
-    public synchronized static  <T> T get(String key,Class<T> clazz){
+    public synchronized static  <T> T get(final String key,final Class<T> clazz){
         return clazz.cast(Cache.get(key ));
     }
-    public synchronized static Object remove(String key){
-        Entity entity=map.remove(key);
+    public synchronized static Object remove(final String key){
+        final Entity entity=map.remove(key);
         if(entity==null) return null;
-        Future future=entity.getFuture();
+        final Future future=entity.getFuture();
         if(future!=null) future.cancel(true);
         return entity.getValue();
     }
@@ -139,9 +139,9 @@ class Cache{
         return map.size();
     }
     private static class Entity{
-        private Object value;
-        private Future future;
-        public Entity(Object value ,Future future){
+        private final Object value;
+        private final Future future;
+        public Entity(final Object value ,final Future future){
             this.value=value;
             this.future=future;
         }

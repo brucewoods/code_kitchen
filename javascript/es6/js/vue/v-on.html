@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+
+    <div id="app">
+        <button @click="click">button</button>
+        <div v-on:click="hello" style="width: 500px; height: 500px; border:1px solid   green;">
+
+            <div v-on:click.stop="hello" style="width: 200px; height: 200px; border: 1px solid  red;"></div>
+            <a href="http://www.baidu.com" v-on:click.prevent>link</a>
+        </div>
+
+        <input type="text" v-model="num" v-on:keyup.up="num+=2" @keyup.down="num-=2" @click.ctrl="num=10">
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                num: 0
+            },
+            methods: {
+                click() {
+                    alert("clicking")
+                },
+                hello() {
+                    alert("hello")
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
