@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hongchai.dao.TRedPacketDao">
+
+    <resultMap type="com.hongchai.entity.TRedPacket" id="TRedPacketMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="amount" column="amount" jdbcType="NUMERIC"/>
+        <result property="sendDate" column="send_date" jdbcType="TIMESTAMP"/>
+        <result property="total" column="total" jdbcType="INTEGER"/>
+        <result property="unitAmount" column="unit_amount" jdbcType="NUMERIC"/>
+        <result property="stock" column="stock" jdbcType="INTEGER"/>
+        <result property="version" column="version" jdbcType="INTEGER"/>
+        <result property="note" column="note" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TRedPacketMap">
+        select
+          id, user_id, amount, send_date, total, unit_amount, stock, version, note
+        from wannaplay.t_red_packet
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TRedPacketMap">
+        select
+          id, user_id, amount, send_date, total, unit_amount, stock, version, note
+        from wannaplay.t_red_packet
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="TRedPacketMap">
+        select
+          id, user_id, amount, send_date, total, unit_amount, stock, version, note
+        from wannaplay.t_red_packet
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="amount != null">
+                and amount = #{amount}
+            </if>
+            <if test="sendDate != null">
+                and send_date = #{sendDate}
+            </if>
+            <if test="total != null">
+                and total = #{total}
+            </if>
+            <if test="unitAmount != null">
+                and unit_amount = #{unitAmount}
+            </if>
+            <if test="stock != null">
+                and stock = #{stock}
+            </if>
+            <if test="version != null">
+                and version = #{version}
+            </if>
+            <if test="note != null and note != ''">
+                and note = #{note}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into wannaplay.t_red_packet(user_id, amount, send_date, total, unit_amount, stock, version, note)
+        values (#{userId}, #{amount}, #{sendDate}, #{total}, #{unitAmount}, #{stock}, #{version}, #{note})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update wannaplay.t_red_packet
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="amount != null">
+                amount = #{amount},
+            </if>
+            <if test="sendDate != null">
+                send_date = #{sendDate},
+            </if>
+            <if test="total != null">
+                total = #{total},
+            </if>
+            <if test="unitAmount != null">
+                unit_amount = #{unitAmount},
+            </if>
+            <if test="stock != null">
+                stock = #{stock},
+            </if>
+            <if test="version != null">
+                version = #{version},
+            </if>
+            <if test="note != null and note != ''">
+                note = #{note},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from wannaplay.t_red_packet where id = #{id}
+    </delete>
+
+</mapper>
